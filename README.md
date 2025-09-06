@@ -1,18 +1,18 @@
 ---------
 
-### —͟͟͞͞𝐒𝐇𝐀𝐇𝐀𝐃𝐀𝐓 𝐂𝐇𝐀𝐓 𝐁𝐎𝐓  𝐅𝐎𝐑𝐊  🌺
+### 𝐂𝐇𝐀𝐓 𝐁𝐎𝐓  𝐅𝐎𝐑𝐊  🌺
 
 ❖ **`A Messenger Multi Device Bot To Take Your Messenger To Another Level!`** 
 
 
 
 Assalamualaikum Everyone!  
-**Welcome to My SHAHADAT CHAT BOT Fork!**
+**Welcome to My CHAT BOT Fork!**
 
-![Box-shaped Image](https://i.imgur.com/u7VnPzH.png)
+![Box-shaped Image](https://imgur.com/gallery/Yrr9S17)
 
 <p align="center" style="animation: glow 2s infinite alternate; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <span style="font-size: 24px; font-weight: bold;">SHAHADAT CHAT BOT</span><br>
+  <span style="font-size: 24px; font-weight: bold;"> CHAT BOT</span><br>
   <span> Develop By SHAHADAT SAHU</span>
 </p>
 
@@ -136,15 +136,15 @@ ___
 
 ## 👨‍💻 **ABOUT THE DEVELOPER**  
   
-**Name:** **`SHAHADAT ISLAM`**  
-**Nice Name:** **`SA HU`**  
-**Profession:** **`STUDENT & CHATBOT DEVELOPER`**  
-**Location:** **`KHAGRACHARI, BANGLADESH`**  
+**Name:** **`SHIFAT`**  
+**Nice Name:** **`SIFU`**  
+**Profession:** **` CHATBOT DEVELOPER`**  
+**Location:** **`KHULNA, BANGLADESH`**  
 
 ### 📞 **CONTACT INFORMATION**  
-- **WhatsApp:** **[01882 333052](https://wa.me/+8801882333052)**  
-- **Facebook:** **[Facebook ID](https://facebook.com/100001039692046)**  
-- **Messenger:** **[Message Me](https://m.me/100001039692046)**  
+- **WhatsApp:** **[01964467614](https://wa.me/+01964467614)**  
+- **Facebook:** **[Facebook ID](https://facebook.com/100078859776449)**  
+- **Messenger:** **[Message Me](https://m.me/100078859776449)**  
 
 ### 🚀 **DEVELOPMENT APPROACH**  
 - 💻 **Copy-paste techniques with customizations**  
@@ -184,7 +184,7 @@ Please do not disturb the admin unless you have a special need. Thank you!
 
 ---
 
-💖 **Thank You For Choosing 𝗦𝗵𝗮𝗵𝗮𝗱𝗮𝘁 𝗖𝗵𝗮𝘁 𝗕𝗼𝘁!**  
+💖 **Thank You For Choosing 𝗖𝗵𝗮𝘁 𝗕𝗼𝘁!**  
 🗓️ *Release Date:* `11/08/2025 at 02:00`  
 ⭐ **Please don't forget to give a star after forking! It really helps!**
 
