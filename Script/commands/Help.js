@@ -44,9 +44,6 @@ module.exports.languages = {
 // এখানে আপনার ফোটো Imgur লিংক করে বসাবেন✅
 
 const helpImages = [
-    "https://i.imgur.com/K2Rgmw6.jpeg",
-    "https://i.imgur.com/K2Rgmw6.jpeg",
-    "https://i.imgur.com/K2Rgmw6.jpeg",
     "https://i.imgur.com/K2Rgmw6.jpeg"
 ];
 
@@ -140,16 +137,16 @@ module.exports.run = function ({ api, event, args, getText }) {
     let msg = helpView.map(cmdName => `┃ ✪ ${cmdName}`).join("\n");
 
     const text = `╭━━━━━━━━━━━━━━━━╮
-┃ 📜 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓 📜
+┃ 📜  𝚂𝙸𝙵𝚄 𝙲𝙼𝙳  📜
 ┣━━━━━━━━━━━━━━━┫
-┃ 📄 Page: ${page}/${totalPages}
-┃ 🧮 Total: ${arrayInfo.length}
+┃ 📄 𝙿𝙰𝙶𝙴: ${page}/${totalPages}
+┃ 🧮 𝚃𝙾𝚃𝙰𝙻: ${arrayInfo.length}
 ┣━━━━━━━━━━━━━━━━┫
 ${msg}
 ┣━━━━━━━━━━━━━━━━┫
 ┃ ⚙ Prefix: ${prefix}
-┃ 🤖 Bot Name: ${global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐁𝐨𝐭"}
-┃ 👑 Owner: 𝐒𝐇𝐈𝐅𝐀𝐓
+┃ 🤖 𝙱𝙾𝚃: ${global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐁𝐨𝐭"}
+┃ 👑 𝙾𝚆𝙽𝙴𝚁: 𝐒𝐇𝐈𝐅𝐀𝐓
 ╰━━━━━━━━━━━━━━━━╯`;
 
     downloadImages(files => {  
