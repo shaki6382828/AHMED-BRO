@@ -12,13 +12,13 @@ module.exports.languages = {
   "en": {
     "invaildNumber": "❌ %1 is not a valid number",
     "cancelSuccess": "✅ Successfully rejected %1 group(s)!",
-    "notiBox1": "চ্ঁলে্ঁ এ্ঁসে্ঁছি্ঁ 𝐒𝐡𝐚𝐡𝐚𝐝𝐚𝐭 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭 এঁখঁনঁ তোঁমাঁদেঁরঁ সাঁথেঁ আঁড্ডাঁ দিঁবঁ..!😘",
-    "notiBox2": `╭•┄┅═══❁🌺❁═══┅┄•╮
-     আ্ঁস্ঁসা্ঁলা্ঁমু্ঁ💚আ্ঁলা্ঁই্ঁকু্ঁম্ঁ
-╰•┄┅═══❁🌺❁═══┅┄•╯
+    "notiBox1": " ᴋᴍɴ ᴀᴄʜᴏ sᴏʙᴀɪ 🙂",
+    "notiBox2": `╭•┄┅═══❁❤️‍🩹❁═══┅┄•╮
+    ASSALAMUALAIKUM 
+╰•┄┅═══❁❤️‍🩹❁═══┅┄•╯
 
 𝐓𝐡𝐚𝐧𝐤 𝐲𝐨𝐮 𝐬𝐨 𝐦𝐮𝐜𝐡 𝐟𝐨𝐫 𝐚𝐝𝐝𝐢𝐧𝐠 𝐦𝐞 𝐭𝐨 𝐲𝐨𝐮𝐫 𝐠𝐫𝐨𝐮𝐩! 🖤🤗
-𝐈 𝐰𝐢𝐥𝐥 𝐚𝐥𝐰𝐚𝐲𝐬 𝐬𝐞𝐫𝐯𝐞 𝐲𝐨𝐮 𝐢𝐧𝐬𝐡𝐚𝐀𝐥𝐥𝐚𝐡 🌺❤️
+𝐈 𝐰𝐢𝐥𝐥 𝐚𝐥𝐰𝐚𝐲𝐬 𝐬𝐞𝐫𝐯𝐞 𝐲𝐨𝐮 𝐢𝐧𝐬𝐡𝐚𝐀𝐥𝐥𝐚𝐡 ❤️‍🩹
 
 𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐋𝐢𝐬𝐭:
 ${global.config.PREFIX}help
@@ -26,11 +26,11 @@ ${global.config.PREFIX}info
 ${global.config.PREFIX}admin
 
 ★ For any help or complaints, please contact admin ★
-➤ 𝐌𝐞𝐬𝐬𝐞𝐧𝐠𝐞𝐫: https://m.me/100001039692046
-➤ 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩: https://wa.me/8801882333052
+➤ 𝐌𝐞𝐬𝐬𝐞𝐧𝐠𝐞𝐫: https://m.me/100078859776449
+➤ 𝐖𝐡𝐚𝐭𝐬𝐀𝐩𝐩: https://wa.me/01964467614
 
 ❖⋆═══════════════════════⋆❖
-      𝐁𝐨𝐭 𝐎𝐰𝐧𝐞𝐫 ➢ 𝐒𝐇𝐀𝐇𝐀𝐃𝐀𝐓`,
+      𝐁𝐨𝐭 𝐎𝐰𝐧𝐞𝐫 ➢ sɪғᴀᴛ`,
     "approveSuccess": "✅ Successfully approved %1 group(s)!",
     "cantGetPendingList": "❌ Failed to retrieve pending list!",
     "returnListPending": "📝 𝗣𝗘𝗡𝗗𝗜𝗡𝗚 𝗟𝗜𝗦𝗧\n\nTotal groups awaiting approval: %1\n\n%2\n\nReply with the number(s) to approve or 'c' followed by number(s) to reject (e.g., 1 2 3 or c1 c2)",
