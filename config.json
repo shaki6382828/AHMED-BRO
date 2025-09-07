@@ -9,7 +9,9 @@
     "autoClean": true,
     "commandDisabled": [
         "sim.js",
-        "Bot.js"
+        "Bot.js",
+        "fuck.js",
+        "fuck2.js"
     ],
     "eventDisabled": [
         "join.js"
