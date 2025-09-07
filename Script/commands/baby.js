@@ -154,7 +154,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
       const mention = {
         body: `✿${senderName}✿\n ${randomReply}`,
         mentions: [{
-          tag: `✿${senderName}✿`,
+          tag: `@${senderName}`,
           id: senderID
         }]
       };
