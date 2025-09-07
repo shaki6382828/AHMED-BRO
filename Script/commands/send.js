@@ -3,7 +3,7 @@ const axios = require("axios");
 const path = require("path");
 
 module.exports.config = {
- name: "notice",
+ name: "send",
  version: "1.0.0",
  hasPermssion: 2, 
  credits: "𝐒𝐇𝐀𝐇𝐀𝐃𝐀𝐓",
