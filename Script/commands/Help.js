@@ -17,20 +17,20 @@ module.exports.config = {
     }
 };
 
-module.exports.languages = {
+module.exports.languages = {  
     "en": {
         "moduleInfo": `╭━━━━━━━━━━━━━━━━╮
-┃ ✨ 𝐒𝐈𝐅𝐔 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 ✨
+┃ ✨ 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐈𝐍𝐅𝐎 ✨
 ┣━━━━━━━━━━━┫
-┃ 🔖 𝙽𝙰𝙼𝙴: %1
-┃ 📄 𝚄𝚂𝙴: %2
-┃ 📜 𝙳𝙴𝚂𝙲𝚁𝙸𝙿𝚃𝙸𝙾𝙽: %3
-┃ 🔑 𝙿𝙴𝚁𝙼𝙸𝚂𝚂𝙸𝙾𝙽: %4
-┃ 👨‍💻 𝙲𝚁𝙴𝙳𝙸𝚃: 𝕊𝕀𝔽𝔸𝕋
-┃ 📂 𝙲𝙰𝚃𝙴𝙶𝙾𝚁𝚈: %6
-┃ ⏳ 𝙲𝙾𝙾𝙻𝙳𝙾𝚄𝙽: %7s
+┃ 🔖 Name: %1
+┃ 📄 Usage: %2
+┃ 📜 Description: %3
+┃ 🔑 Permission: %4
+┃ 👨‍💻 Credit: %5
+┃ 📂 Category: %6
+┃ ⏳ Cooldown: %7s
 ┣━━━━━━━━━━━━━━━━┫
-┃ ✰ 𝙿𝚁𝙴𝙵𝙸𝚇: %8
+┃  ✰ 𝙿𝚁𝙴𝙵𝙸𝚇: %8
 ┃ ✰ 𝙱𝙾𝚃 𝙽𝙰𝙼𝙴: %9
 ┃ ✰ 𝙲𝙴𝙾: 𝐒𝐇𝐈𝐅𝐀𝐓
 ╰━━━━━━━━━━━━━━━━╯`,
@@ -44,7 +44,10 @@ module.exports.languages = {
 // এখানে আপনার ফোটো Imgur লিংক করে বসাবেন✅
 
 const helpImages = [
-    "https:/i.imgur.com/K2Rgmw6.jpeg"
+    "https://i.imgur.com/sxSn1K3.jpeg",
+    "https://i.imgur.com/8WvpgUL.jpeg",
+    "https://i.imgur.com/8WvpgUL.jpeg",
+    "https://i.imgur.com/sxSn1K3.jpeg"
 ];
 
 function downloadImages(callback) {
@@ -82,7 +85,7 @@ module.exports.handleEvent = function ({ api, event, getText }) {
         command.config.commandCategory || "Unknown",  
         command.config.cooldowns || 0,  
         prefix,  
-        global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭"  
+        global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐁𝐨𝐭"  
     );  
 
     downloadImages(files => {  
@@ -112,8 +115,8 @@ module.exports.run = function ({ api, event, args, getText }) {
             command.config.commandCategory || "Unknown",  
             command.config.cooldowns || 0,  
             prefix,  
-            global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭"  
-        );  
+            global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐁𝐨𝐭"  
+        );
 
         downloadImages(files => {  
             const attachments = files.map(f => fs.createReadStream(f));  
@@ -134,19 +137,19 @@ module.exports.run = function ({ api, event, args, getText }) {
     const start = numberOfOnePage * (page - 1);  
     const helpView = arrayInfo.slice(start, start + numberOfOnePage);  
 
-    let msg = helpView.map(cmdName => `┃✿➳ ${cmdName} ♡`).join("\n");
+    let msg = helpView.map(cmdName => `┃ ✪ ${cmdName}`).join("\n");
 
     const text = `╭━━━━━━━━━━━━━━━━╮
 ┃ 📜 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓 📜
 ┣━━━━━━━━━━━━━━━┫
-┃ 📄 𝙿𝙰𝙶𝙴: ${page}/${totalPages}
-┃ 🧮 𝚃𝙾𝚃𝙰𝙻: ${arrayInfo.length}
+┃ 📄 Page: ${page}/${totalPages}
+┃ 🧮 Total: ${arrayInfo.length}
 ┣━━━━━━━━━━━━━━━━┫
 ${msg}
 ┣━━━━━━━━━━━━━━━━┫
-┃ ⚙ 𝙿𝚁𝙴𝙵𝙸𝚇: ${prefix}
-┃ 🤖 𝙱𝙾𝚃 𝙽𝙰𝙼𝙴: ${global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐁𝐨𝐭"}
-┃ 👑 𝙲𝙴𝙾: 𝐒𝐇𝐈𝐅𝐀𝐓
+┃ ⚙ Prefix: ${prefix}
+┃ 🤖 Bot Name: ${global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐁𝐨𝐭"}
+┃ 👑 Owner: 𝐒𝐇𝐈𝐅𝐀𝐓
 ╰━━━━━━━━━━━━━━━━╯`;
 
     downloadImages(files => {  
@@ -156,3 +159,4 @@ ${msg}
         }, messageID);  
     });  
 };
+                           
