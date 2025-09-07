@@ -147,7 +147,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
         
         " ♡ 𝙷𝚞𝚖𝚖 ♡ ",
         " 𝙺𝚒 𝙷𝚘𝚒𝚌𝚑𝚎.𝙰𝚝𝚘 𝙳𝚊𝚔𝚘 𝙺𝚗 🤨",
-        " ☆ 𝙱𝚘𝚕𝚘 𝙹𝚊𝚊𝚗 ☆
+        " ☆ 𝙱𝚘𝚕𝚘 𝙹𝚊𝚊𝚗 ☆"
       ];
 
       const randomReply = greetings[Math.floor(Math.random() * greetings.length)];
