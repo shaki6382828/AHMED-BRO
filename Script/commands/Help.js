@@ -20,19 +20,19 @@ module.exports.config = {
 module.exports.languages = {
     "en": {
         "moduleInfo": `╭━━━━━━━━━━━━━━━━╮
-┃ ✨ 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐈𝐍𝐅𝐎 ✨
+┃ ✨ 𝐒𝐈𝐅𝐔 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 ✨
 ┣━━━━━━━━━━━┫
-┃ 🔖 Name: %1
-┃ 📄 Usage: %2
-┃ 📜 Description: %3
-┃ 🔑 Permission: %4
-┃ 👨‍💻 Credit: %5
-┃ 📂 Category: %6
-┃ ⏳ Cooldown: %7s
+┃ 🔖 𝙽𝙰𝙼𝙴: %1
+┃ 📄 𝚄𝚂𝙴: %2
+┃ 📜 𝙳𝙴𝚂𝙲𝚁𝙸𝙿𝚃𝙸𝙾𝙽: %3
+┃ 🔑 𝙿𝙴𝚁𝙼𝙸𝚂𝚂𝙸𝙾𝙽: %4
+┃ 👨‍💻 𝙲𝚁𝙴𝙳𝙸𝚃: 𝕊𝕀𝔽𝔸𝕋
+┃ 📂 𝙲𝙰𝚃𝙴𝙶𝙾𝚁𝚈: %6
+┃ ⏳ 𝙲𝙾𝙾𝙻𝙳𝙾𝚄𝙽: %7s
 ┣━━━━━━━━━━━━━━━━┫
-┃ ⚙ Prefix: %8
-┃ 🤖 Bot Name: %9
-┃ 👑 Owner: 𝐒𝐇𝐀𝐇𝐀𝐃𝐀𝐓 𝐒𝐀𝐇𝐔
+┃ ✰ 𝙿𝚁𝙴𝙵𝙸𝚇: %8
+┃ ✰ 𝙱𝙾𝚃 𝙽𝙰𝙼𝙴: %9
+┃ ✰ 𝙲𝙴𝙾: 𝐒𝐇𝐈𝐅𝐀𝐓
 ╰━━━━━━━━━━━━━━━━╯`,
         "helpList": "[ There are %1 commands. Use: \"%2help commandName\" to view more. ]",
         "user": "User",
@@ -85,7 +85,7 @@ module.exports.handleEvent = function ({ api, event, getText }) {
         command.config.commandCategory || "Unknown",  
         command.config.cooldowns || 0,  
         prefix,  
-        global.config.BOTNAME || "𝐒𝐡𝐚𝐡𝐚𝐝𝐚𝐭 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭"  
+        global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭"  
     );  
 
     downloadImages(files => {  
@@ -115,7 +115,7 @@ module.exports.run = function ({ api, event, args, getText }) {
             command.config.commandCategory || "Unknown",  
             command.config.cooldowns || 0,  
             prefix,  
-            global.config.BOTNAME || "𝐒𝐡𝐚𝐡𝐚𝐝𝐚𝐭 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭"  
+            global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭"  
         );  
 
         downloadImages(files => {  
@@ -137,19 +137,19 @@ module.exports.run = function ({ api, event, args, getText }) {
     const start = numberOfOnePage * (page - 1);  
     const helpView = arrayInfo.slice(start, start + numberOfOnePage);  
 
-    let msg = helpView.map(cmdName => `┃ ✪ ${cmdName}`).join("\n");
+    let msg = helpView.map(cmdName => `┃✿➳ ${cmdName} ♡`).join("\n");
 
     const text = `╭━━━━━━━━━━━━━━━━╮
 ┃ 📜 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓 📜
 ┣━━━━━━━━━━━━━━━┫
-┃ 📄 Page: ${page}/${totalPages}
-┃ 🧮 Total: ${arrayInfo.length}
+┃ 📄 𝙿𝙰𝙶𝙴: ${page}/${totalPages}
+┃ 🧮 𝚃𝙾𝚃𝙰𝙻: ${arrayInfo.length}
 ┣━━━━━━━━━━━━━━━━┫
 ${msg}
 ┣━━━━━━━━━━━━━━━━┫
-┃ ⚙ Prefix: ${prefix}
-┃ 🤖 Bot Name: ${global.config.BOTNAME || "𝐒𝐡𝐚𝐡𝐚𝐝𝐚𝐭 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭"}
-┃ 👑 Owner: 𝐒𝐇𝐀𝐇𝐀𝐃𝐀𝐓 𝐒𝐀𝐇𝐔
+┃ ⚙ 𝙿𝚁𝙴𝙵𝙸𝚇: ${prefix}
+┃ 🤖 𝙱𝙾𝚃 𝙽𝙰𝙼𝙴: ${global.config.BOTNAME || "𝐒𝐢𝐟𝐮 𝐁𝐨𝐭"}
+┃ 👑 𝙲𝙴𝙾: 𝐒𝐇𝐈𝐅𝐀𝐓
 ╰━━━━━━━━━━━━━━━━╯`;
 
     downloadImages(files => {  
