@@ -21,7 +21,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
     const query = args.join(" ").toLowerCase();
     
     if (!query) {
-      const ran = ["Bolo baby", "hum"];
+      const ran = ["Bolo baby", "hum","আজ থেকে আর কাউকে পাত্তা দিমু না -!😏-কারণ আমি ফর্সা হওয়ার ক্রিম কিনছি -!🙂"];
       const r = ran[Math.floor(Math.random() * ran.length)];
       return api.sendMessage(r, event.threadID, (err, info) => {
         if (!err) {
