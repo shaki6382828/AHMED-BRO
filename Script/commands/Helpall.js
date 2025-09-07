@@ -26,7 +26,7 @@ module.exports.run = async function ({ api, event }) {
 
  allCommands.sort();
 
- const finalText = `╔═══❖ 💖𝐒𝐈𝐅𝐔 𝐂𝐌𝐃💖 ❖═══╗
+ const finalText = `╔══❖💖𝐒𝐈𝐅𝐔 𝐂𝐌𝐃💖❖══╗
 ${allCommands.map(cmd => `║ ❥➔ ${cmd}`).join("\n")}
 ╠═════♡ 💝💖💝 ♡═════╣
 ║ ❥ 𝙱𝙾𝚃: 𝐒𝐈𝐅𝐔 𝐁𝐎𝐓
