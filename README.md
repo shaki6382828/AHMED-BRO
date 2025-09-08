@@ -7,13 +7,13 @@
 
 
 Assalamualaikum Everyone!  
-**Welcome to My CHAT BOT Fork!**
+**Welcome to My 𝘀𝗶𝗳𝘂 BOT Fork!**
 
 ![Box-shaped Image](https://imgur.com/gallery/Yrr9S17)
 
 <p align="center" style="animation: glow 2s infinite alternate; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <span style="font-size: 24px; font-weight: bold;"> CHAT BOT</span><br>
-  <span> Develop By SHAHADAT SAHU</span>
+  <span> 𝗗𝗔𝗩𝗘𝗟𝗢𝗣 𝗕𝗬 𝗦𝗛𝗜𝗙𝗔𝗧</span>
 </p>
 
 
@@ -184,8 +184,8 @@ Please do not disturb the admin unless you have a special need. Thank you!
 
 ---
 
-💖 **Thank You For Choosing 𝗖𝗵𝗮𝘁 𝗕𝗼𝘁!**  
-🗓️ *Release Date:* `11/08/2025 at 02:00`  
+💖 **Thank You For Choosing 𝗦𝗜𝗙𝗨 𝗕𝗼𝘁!**  
+🗓️ *Release Date:* `08/09/2025 at 08:30`  
 ⭐ **Please don't forget to give a star after forking! It really helps!**
 
 ---
@@ -202,4 +202,4 @@ Please do not disturb the admin unless you have a special need. Thank you!
   <a href="https://youtube.com/@cyberbotcommunity"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a>
 </p>
 
-**I hope you enjoy my fork! Thank you for supporting the cyber chat bot community!**
+**I hope you enjoy my fork! Thank you for supporting the 𝘀𝗶𝗳𝘂 chat bot!**
