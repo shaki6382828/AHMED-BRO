@@ -15,7 +15,8 @@
         "murgi.js",
         "murgi2.js",
         "war.js",
-        "megi_chudi.js"
+        "megi_chudi.js",
+        "autoreact.js"
     ],
     "eventDisabled": [
         "join.js"
@@ -23,8 +24,8 @@
     "EMAIL": "",
     "PASSWORD": "",
     "OTPKEY": "",
-    "BOTNAME": "─꯭─⃝‌‌𝐒𝐈𝐅𝐔 𝐁𝐎𝐓 🎀",
-    "PREFIX": "!",
+    "BOTNAME": "──꯭─⃝‌‌𝗦𝗜𝗙𝗨 𝗕𝗢𝗧───",
+    "PREFIX": ".",
     "ADMINBOT": [
         "100078859776449",
         "100078859776449",
