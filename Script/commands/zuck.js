@@ -1,7 +1,7 @@
 //learn to eat, learn to speak, don't learn the habit of replacing cre 
 module.exports.config = {
 
-	name: "zuck",
+	name: "kaku",
 
 	version: "1.0.1",
 	hasPermssion: 0,
