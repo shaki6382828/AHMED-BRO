@@ -98,7 +98,7 @@ module.exports.run = async function ({ event, api, args }) {
  const { threadID, messageID, senderID } = event;
 
  if (!event.mentions || Object.keys(event.mentions).length === 0)
- return api.sendMessage("বলদ একজনকে ট্যাগ করতে হবে 🌚🌝", threadID, messageID);
+ return api.sendMessage("বলদ একজনকে ট্যাগ করতে হবে 🌚🐸🌝", threadID, messageID);
 
  var mention = Object.keys(event.mentions)[0];
  let tag = event.mentions[mention].replace("@", "");
