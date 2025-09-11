@@ -14,7 +14,9 @@
         "murgi2.js",
         "war.js",
         "megi_chudi.js",
-        "autoreact.js"
+        "autoreact.js",
+        "autotime.js",
+        "autoseen.js"
     ],
     "eventDisabled": [
         "join.js"
