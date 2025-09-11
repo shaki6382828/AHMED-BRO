@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "pending",
+  name: "pen",
   version: "1.0.6",
   credits: "𝐒𝐡𝐚𝐡𝐚𝐝𝐚𝐭 𝐈𝐬𝐥𝐚𝐦",
   hasPermssion: 2,
