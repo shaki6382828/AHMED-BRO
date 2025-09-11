@@ -20,6 +20,6 @@ module.exports.run = async function ({ event, api, Threads, Users }) {
                               global.data.threadData.set(event.threadID, data);
                     })
 			}
- 	return api.sendMessage(`» Your team now has Anti Join mode turned on, please turn it off before adding a new 👻 member`, event.threadID);
+ 	return api.sendMessage(`💢✨ 𝙰𝙽𝚃𝙸 𝙹𝙾𝙸𝙽 𝙼𝙾𝙳𝙴 𝚃𝚄𝚁𝙽𝙴𝙳 𝙾𝙽 😗 \n ✨⚡ 𝙿𝙻𝙴a𝚂𝙴 𝚃𝚄𝚁𝙽 𝙸𝚃 𝙾𝙵𝙵 𝙱𝙴𝙵𝙾𝚁𝙴 𝙰𝙳𝙳𝙸𝙽𝙶 𝙰 𝙽𝙴𝚆 𝙼𝙴𝙼𝙱𝙴𝚁 💝`, event.threadID);
  }
 }
