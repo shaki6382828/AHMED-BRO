@@ -1,85 +1,57 @@
 const axios = require("axios");
-const fs = require("fs-extra");
-//const tinyurl = require("tinyurl");
-const baseApiUrl = async () => {
-  const base = await axios.get(`https://raw.githubusercontent.com/Blankid018/D1PT0/main/baseApiUrl.json`);
-  return base.data.api;
-};
+const fs = require("fs");
+const path = require("path");
 
-const config = {
-  name: "dld",
-  version: "2.0",
-  author: "Dipto",
-  credits: "Dipto",
-  description: "Auto download video from tiktok, facebook, Instagram, YouTube, and more",
+module.exports.config = {
+  name: "dlvideo",
+  version: "1.0",
+  author: "Sifat",
+  credits: "Sifat",
+  description: "Download video from a direct video link",
   category: "media",
-  commandCategory: "media",
+  usages: "[video link]",
   usePrefix: true,
-  prefix: true,
-  dependencies: {
-   // "tinyurl": "",
-    "fs-extra": "",
-  },
 };
 
-const onStart = () => {};
-const onChat = async ({ api, event }) => {
-  let dipto = event.body ? event.body : "", ex, cp;
-  try {
-    if (
-      dipto.startsWith("https://vt.tiktok.com") ||
-      dipto.startsWith("https://www.tiktok.com/") ||
-      dipto.startsWith("https://www.facebook.com") ||
-      dipto.startsWith("https://www.instagram.com/") ||
-      dipto.startsWith("https://youtu.be/") ||
-      dipto.startsWith("https://youtube.com/") ||
-      dipto.startsWith("https://x.com/") ||
-      dipto.startsWith("https://youtube.com/") ||
-      dipto.startsWith("https://www.instagram.com/p/") ||
-      dipto.startsWith("https://pin.it/") ||
-      dipto.startsWith("https://twitter.com/") ||
-      dipto.startsWith("https://vm.tiktok.com") ||
-      dipto.startsWith("https://fb.watch")
-    ) {
-      api.setMessageReaction("⌛", event.messageID, {}, true);
-      const w = await api.sendMessage("╭──────•◈•───────╮                        ♥️𝗦𝗜𝗙𝗨 𝗕𝗢𝗧♥️                              𝘗𝘓𝘌𝘈𝘚𝘌 𝘞𝘈𝘐𝘛 𝘋𝘖𝘞𝘕𝘓𝘖𝘈𝘋 𝘠𝘖𝘜𝘙 𝘝𝘐𝘋𝘌𝘖 ╰──────•◈•───────╯", event.threadID);
-      const response = await axios.get(`${await baseApiUrl()}/alldl?url=${encodeURIComponent(dipto)}`);
-      const d = response.data;
-      if (d.result.includes(".jpg")) {
-        ex = ".jpg";
-        cp = "Here's your Photo <😘";
-      } else if (d.result.includes(".png")) {
-        ex = ".png";
-        cp = "Here's your Photo <😘";
-      } else if (d.result.includes(".jpeg")) {
-        ex = ".jpeg";
-        cp = "Here's your Photo <😘";
-      } else {
-        ex = ".mp4";
-        cp = d.cp;
-      }
-      const path = __dirname + `/cache/video${ex}`;
-      fs.writeFileSync(path, Buffer.from((await axios.get(d.result, { responseType: "arraybuffer" })).data, "binary"));
-      const tinyUrlResponse = await axios.get(`https://tinyurl.com/api-create.php?url=${d.result}`);
-      api.setMessageReaction("✅", event.messageID, {}, true);
-      api.unsendMessage(w.messageID);
-      await api.sendMessage({
-          body: `${d.cp || null}\n✅ | Link: ${tinyUrlResponse.data || null}`,
-          attachment: fs.createReadStream(path),
-        }, event.threadID, () => fs.unlinkSync(path), event.messageID
-      )
-    }
-  } catch (err) {
-    api.setMessageReaction("❌", event.messageID, {}, true);
-    console.log(err);
-    api.sendMessage(`Error: ${err.message}`, event.threadID, event.messageID);
+module.exports.onStart = async function ({ api, event, args }) {
+  const videoUrl = args[0];
+
+  if (!videoUrl) {
+    return api.sendMessage("❌ | Please give a video link!", event.threadID, event.messageID);
   }
-};
 
-module.exports = {
-  config,
-  onChat,
-  onStart,
-  run: onStart,
-  handleEvent: onChat,
+  const filePath = path.join(__dirname, "cache", `video_${Date.now()}.mp4`);
+
+  try {
+    api.sendMessage("⏳ Downloading video, please wait...", event.threadID, event.messageID);
+
+    const response = await axios({
+      method: "GET",
+      url: videoUrl,
+      responseType: "stream",
+    });
+
+    const writer = fs.createWriteStream(filePath);
+    response.data.pipe(writer);
+
+    writer.on("finish", () => {
+      api.sendMessage(
+        {
+          body: "✅ Here is your video:",
+          attachment: fs.createReadStream(filePath),
+        },
+        event.threadID,
+        () => fs.unlinkSync(filePath), // ✅ ফাইল পাঠানোর পর ডিলিট হয়ে যাবে
+        event.messageID
+      );
+    });
+
+    writer.on("error", (err) => {
+      console.error(err);
+      api.sendMessage("❌ | Failed to download video.", event.threadID, event.messageID);
+    });
+  } catch (err) {
+    console.error("Error:", err);
+    api.sendMessage(`❌ | Error: ${err.message}`, event.threadID, event.messageID);
+  }
 };
