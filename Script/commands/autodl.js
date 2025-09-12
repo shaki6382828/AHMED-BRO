@@ -7,7 +7,7 @@ const baseApiUrl = async () => {
 };
 
 const config = {
-  name: "autodl",
+  name: "dld",
   version: "2.0",
   author: "Dipto",
   credits: "Dipto",
