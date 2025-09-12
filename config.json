@@ -8,7 +8,7 @@
     "allowInbox": false,
     "autoClean": true,
     "commandDisabled": [
-        "sim.js",
+        "",
         "Bot.js",
         "murgi.js",
         "murgi2.js",
@@ -17,7 +17,8 @@
         "autoreact.js",
         "autotime.js",
         "autoseen.js",
-        "resend.js"
+        "resend.js",
+        "rankup.js"
     ],
     "eventDisabled": [
         "join.js"
