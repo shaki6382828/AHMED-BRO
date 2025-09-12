@@ -29,7 +29,7 @@ module.exports.run = async function ({ api, event, args, Users }) {
             name: module.exports.config.name,
             messageID: info.messageID,
             author: event.senderID,
-            type: "simsimi"
+            type: "simsim"
           });
         }
       });
