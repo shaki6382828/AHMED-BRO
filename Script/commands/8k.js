@@ -2,6 +2,9 @@ const axios = require('axios');
 const fs = require('fs-extra');
 const path = require('path');
 
+// ⚠️ এখানে আপনার DeepAI API কী দেওয়া হয়েছে ⚠️
+const DEEPAI_API_KEY = "216fcba4-20c6-4bf9-80e8-aad71dd64ef7";
+
 module.exports = {
   config: {
     name: "8k",
@@ -22,33 +25,48 @@ module.exports = {
       ? event.messageReply.attachments[0].url : args.join(" ");
 
     if (!imageUrl) {
-      return api.sendMessage("Please reply to an image or provide a valid image URL.", threadID, messageID);
+      return api.sendMessage("অনুগ্রহ করে একটি ছবিতে রিপ্লাই করুন অথবা একটি ছবির URL দিন।", threadID, messageID);
     }
 
     try {
-      api.sendMessage("Processing your image to 8K. Please wait...", threadID, messageID);
+      api.sendMessage("আপনার ছবিটি 8K তে প্রসেসিং করা হচ্ছে। অনুগ্রহ করে অপেক্ষা করুন...", threadID, messageID);
 
-      const apiUrl = `https://api.replicate.com/v1/predictions`; // Note: You'll need an API key for a real-world scenario. This is a placeholder.
-      
-      // For demonstration, we'll use a public image upscale API.
-      // A valid API would require sending the image data, not just the URL.
-      // Example using a free public endpoint for a similar purpose:
-      const upscalerApi = `https://upscale.onrender.com/upscale?imageUrl=${encodeURIComponent(imageUrl)}`;
-      
-      const response = await axios.get(upscalerApi, { responseType: 'arraybuffer' });
-      const upscaledImageBuffer = Buffer.from(response.data);
+      const response = await axios.post(
+        "https://api.deepai.org/api/torch-srgan",
+        { "image": imageUrl },
+        { 
+          headers: { 
+            "api-key": DEEPAI_API_KEY,
+            "Content-Type": "application/json"
+          } 
+        }
+      );
+
+      const upscaledImageUrl = response.data.output_url;
+      if (!upscaledImageUrl) {
+        throw new Error("আপস্কেলিংয়ের পর ছবির URL পাওয়া যায়নি।");
+      }
+
+      const upscaledImageResponse = await axios.get(upscaledImageUrl, { responseType: 'arraybuffer' });
+      const upscaledImageBuffer = Buffer.from(upscaledImageResponse.data);
 
       await fs.outputFile(tempImagePath, upscaledImageBuffer);
 
       api.sendMessage({
-        body: "✅ Image upscaled to 8K successfully!",
+        body: "✅ ছবিটি সফলভাবে 8K তে আপস্কেল করা হয়েছে!",
         attachment: fs.createReadStream(tempImagePath)
       }, threadID, () => fs.unlink(tempImagePath), messageID);
 
     } catch (error) {
       console.error(error);
-      api.sendMessage("❌ An error occurred while upscaling the image.", threadID, messageID);
+      let errorMessage = "❌ ছবিটি আপস্কেল করার সময় একটি সমস্যা হয়েছে।";
+      if (error.response && error.response.status === 401) {
+        errorMessage = "❌ API কীটি সঠিক নয়। অনুগ্রহ করে আপনার API কী চেক করুন।";
+      } else if (error.response && error.response.data && error.response.data.err) {
+        errorMessage = `❌ API থেকে একটি সমস্যা এসেছে: ${error.response.data.err}`;
+      }
+      api.sendMessage(errorMessage, threadID, messageID);
     }
   }
 };
-      
+        
