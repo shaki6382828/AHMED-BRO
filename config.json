@@ -16,7 +16,8 @@
         "megi_chudi.js",
         "autoreact.js",
         "autotime.js",
-        "autoseen.js"
+        "autoseen.js",
+        "resend.js"
     ],
     "eventDisabled": [
         "join.js"
