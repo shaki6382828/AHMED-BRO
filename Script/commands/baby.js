@@ -1,4 +1,4 @@
-const axios = require("axios");
+Const axios = require("axios");
 
 const simsim = "https://simsimi.cyberbot.top";
 
@@ -6,7 +6,7 @@ module.exports.config = {
   name: "baby",
   version: "1.0.3",
   hasPermssion: 0,
-  credits: "ULLASH",
+  credits: "SIFAT",
   description: "Cute AI Baby Chatbot | Talk, Teach & Chat with Emotion ☢️",
   commandCategory: "simsim",
   usages: "[message/query]",
@@ -19,9 +19,9 @@ module.exports.run = async function ({ api, event, args, Users }) {
     const uid = event.senderID;
     const senderName = await Users.getNameUser(uid);
     const query = args.join(" ").toLowerCase();
-    
+
     if (!query) {
-      const ran = ["Bolo baby", "hum","আজ থেকে আর কাউকে পাত্তা দিমু না -!😏-কারণ আমি ফর্সা হওয়ার ক্রিম কিনছি -!🙂"];
+      const ran = ["Bolo baby", "hum", "আজ থেকে আর কাউকে পাত্তা দিমু না -!😏-কারণ আমি ফর্সা হওয়ার ক্রিম কিনছি -!🙂"];
       const r = ran[Math.floor(Math.random() * ran.length)];
       return api.sendMessage(r, event.threadID, (err, info) => {
         if (!err) {
@@ -35,12 +35,12 @@ module.exports.run = async function ({ api, event, args, Users }) {
       });
     }
 
-    if (["remove", "rm"].includes(args[0])) {
-      const parts = query.replace(/^(remove|rm)\s*/, "").split(" - ");
+    if (args[0] === "remove" || args[0] === "rm") {
+      const parts = args.slice(1).join(" ").split(" - ");
       if (parts.length < 2)
         return api.sendMessage(" | Use: remove [Question] - [Reply]", event.threadID, event.messageID);
       const [ask, ans] = parts;
-      const res = await axios.get(`${simsim}/delete?ask=${encodeURIComponent(ask)}&ans=${encodeURIComponent(ans)}`);
+      const res = await axios.get(`${simsim}/delete?ask=${encodeURIComponent(ask.trim())}&ans=${encodeURIComponent(ans.trim())}`);
       return api.sendMessage(res.data.message, event.threadID, event.messageID);
     }
 
@@ -58,26 +58,26 @@ module.exports.run = async function ({ api, event, args, Users }) {
     }
 
     if (args[0] === "edit") {
-      const parts = query.replace("edit ", "").split(" - ");
+      const parts = args.slice(1).join(" ").split(" - ");
       if (parts.length < 3)
         return api.sendMessage(" | Use: edit [Question] - [OldReply] - [NewReply]", event.threadID, event.messageID);
       const [ask, oldReply, newReply] = parts;
-      const res = await axios.get(`${simsim}/edit?ask=${encodeURIComponent(ask)}&old=${encodeURIComponent(oldReply)}&new=${encodeURIComponent(newReply)}`);
+      const res = await axios.get(`${simsim}/edit?ask=${encodeURIComponent(ask.trim())}&old=${encodeURIComponent(oldReply.trim())}&new=${encodeURIComponent(newReply.trim())}`);
       return api.sendMessage(res.data.message, event.threadID, event.messageID);
     }
 
     if (args[0] === "teach") {
-      const parts = query.replace("teach ", "").split(" - ");
+      const parts = args.slice(1).join(" ").split(" - ");
       if (parts.length < 2)
         return api.sendMessage(" | Use: teach [Question] - [Reply]", event.threadID, event.messageID);
       const [ask, ans] = parts;
-      const res = await axios.get(`${simsim}/teach?ask=${encodeURIComponent(ask)}&ans=${encodeURIComponent(ans)}&senderID=${uid}&senderName=${encodeURIComponent(senderName)}`);
+      const res = await axios.get(`${simsim}/teach?ask=${encodeURIComponent(ask.trim())}&ans=${encodeURIComponent(ans.trim())}&senderID=${uid}&senderName=${encodeURIComponent(senderName)}`);
       return api.sendMessage(`${res.data.message || "Reply added successfully!"}`, event.threadID, event.messageID);
     }
 
     const res = await axios.get(`${simsim}/simsimi?text=${encodeURIComponent(query)}&senderName=${encodeURIComponent(senderName)}`);
     const responses = Array.isArray(res.data.response) ? res.data.response : [res.data.response];
-    
+
     for (const reply of responses) {
       await new Promise((resolve) => {
         api.sendMessage(reply, event.threadID, (err, info) => {
@@ -107,7 +107,7 @@ module.exports.handleReply = async function ({ api, event, Users, handleReply })
 
     const res = await axios.get(`${simsim}/simsimi?text=${encodeURIComponent(replyText)}&senderName=${encodeURIComponent(senderName)}`);
     const responses = Array.isArray(res.data.response) ? res.data.response : [res.data.response];
-    
+
     for (const reply of responses) {
       await new Promise((resolve) => {
         api.sendMessage(reply, event.threadID, (err, info) => {
@@ -121,8 +121,7 @@ module.exports.handleReply = async function ({ api, event, Users, handleReply })
           }
           resolve();
         }, event.messageID);
-      }
-      );
+      });
     }
   } catch (err) {
     console.error(err);
@@ -144,7 +143,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
     ) {
       const greetings = [
         " ✰ 𝙷𝚊 𝙰𝚌𝚑𝚒 𝙰𝚖𝚒 ⁂ 𝙱𝚘𝚕𝚘 ✰",
-        
+
         " ♡ 𝙷𝚞𝚖𝚖 ♡ ",
         "✦ 𝙺𝚒 𝙷𝚘𝚒𝚌𝚑𝚎 𝙰𝚝𝚘 𝙳𝚊𝚔𝚘 𝙺𝚗 🤨 ✦",
         " ☆ 𝙱𝚘𝚕𝚘 𝙹𝚊𝚊𝚗 ☆"
@@ -183,7 +182,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
 
       const res = await axios.get(`${simsim}/simsimi?text=${encodeURIComponent(query)}&senderName=${encodeURIComponent(senderName)}`);
       const responses = Array.isArray(res.data.response) ? res.data.response : [res.data.response];
-      
+
       for (const reply of responses) {
         await new Promise((resolve) => {
           api.sendMessage(reply, event.threadID, (err, info) => {
@@ -205,3 +204,4 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
     return api.sendMessage(`| Error in handleEvent: ${err.message}`, event.threadID, event.messageID);
   }
 };
+      
