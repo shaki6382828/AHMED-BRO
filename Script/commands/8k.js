@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 const path = require('path');
 
 // ⚠️ এখানে আপনার DeepAI API কী দেওয়া হয়েছে ⚠️
-const DEEPAI_API_KEY = "216fcba4-20c6-4bf9-80e8-aad71dd64ef7";
+const DEEPAI_API_KEY = "2235c3a4-e429-46bb-861a-4f3459f72e62";
 
 module.exports = {
   config: {
