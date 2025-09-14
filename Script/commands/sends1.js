@@ -1,5 +1,5 @@
 module.exports.config = {
-	name: "s1",
+	name: "💌",
 	version: "1.0.2",
 	hasPermssion: 2,
 	credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑴_ ☢️",
@@ -47,8 +47,8 @@ var abc = event.messageReply.attachments[0].url;
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage({body:"ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ⸙✧(≖ ◡ ≖✿)\n
-✦───────•◈•───────✦\n\n" + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
+			api.sendMessage({body:" ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ⸙✧(≖ ◡ ≖✿)
+\n✦───────•◈•───────✦\n\n" + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
@@ -65,8 +65,7 @@ else {
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage("ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ⸙✧(≖ ◡ ≖✿)\n
-✦───────•◈•───────✦\n\n" + args.join(` `), idThread, (error, info) => {
+			api.sendMessage("»✿ 𝐈𝐌𝐏𝐎𝐑𝐓𝐀𝐍𝐓 𝐍𝐎𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐅𝐑𝐎𝐌 𝐀𝐃𝐌𝐈𝐍 𝐒𝐈𝐅𝐀𝐓 ✿«\n\n" + args.join(` `), idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
@@ -74,4 +73,4 @@ else {
 		}
 	}
 	return api.sendMessage(getText("sendSuccess", count), event.threadID, () => (cantSend.length > 0 ) ? api.sendMessage(getText("sendFail", cantSend.length), event.threadID, event.messageID) : "", event.messageID); }
-  }
+}
