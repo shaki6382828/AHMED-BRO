@@ -35,13 +35,3 @@ module.exports.run = async ({
   }, _0x378daa.threadID, () => _0x47e3e1.unlinkSync(__dirname + "/cyber.jpg"));
   return _0x1dfa33(encodeURI(_0x476fbd[Math.floor(Math.random() * _0x476fbd.length)])).pipe(_0x47e3e1.createWriteStream(__dirname + "/cyber.jpg")).on("close", () => _0x2152c5());
 };
-�� ⚠️ 𝑻𝑬𝑨𝑴_ ☢️"];
-  ;
-  var _0x1b9b31 = _0x350d8d[Math.floor(Math.random() * _0x350d8d.length)];
-  var _0x476fbd = ["https://i.imgur.com/s7lWVBQ.jpeg", "https://i.imgur.com/Tj6adbm.jpeg", "https://i.imgur.com/L5ZEaPA.jpeg", "https://i.imgur.com/uXi1lrg.jpeg", "https://i.imgur.com/h0CMDtn.jpeg", "https://i.imgur.com/XfYz6wN.jpeg", "https://i.imgur.com/MrnFFTs.jpeg", "https://i.imgur.com/1d4PKgo.jpeg", "https://i.imgur.com/QQjV0Ec.jpeg", "https://i.imgur.com/rbYjAZ2.jpeg", "https://i.imgur.com/Jo6JRP2.jpeg", "https://i.imgur.com/rl5DsnE.jpeg", "https://i.imgur.com/gc17ZIL.jpeg", "https://i.imgur.com/5idifU6.jpeg", "https://i.imgur.com/DQ391x5.jpeg", "https://i.imgur.com/66CoeG7.jpeg", "https://i.imgur.com/2NK5XTr.jpeg", "https://i.imgur.com/FLGuvcu.jpeg", "https://i.imgur.com/xfaDpuj.jpeg", "https://i.imgur.com/QDnkQZh.jpeg", "https://i.imgur.com/Z4674C4.jpeg", "https://i.imgur.com/YyNjYOU.jpeg", "https://i.imgur.com/Sbw1Ek5.jpeg", "https://i.imgur.com/9MyDAos.jpeg", "https://i.imgur.com/JmwQicn.jpeg", "https://i.imgur.com/RzlDJy9.jpeg", "https://i.imgur.com/6yjeFrc.jpeg", "https://i.imgur.com/vkLlOgs.jpeg", "https://i.imgur.com/X41jmrh.jpeg", "https://i.imgur.com/ESHNJxr.jpeg"];
-  var _0x2152c5 = () => _0x31a2af.sendMessage({
-    'body': " " + _0x1b9b31 + " ",
-    'attachment': _0x47e3e1.createReadStream(__dirname + "/cyber.jpg")
-  }, _0x378daa.threadID, () => _0x47e3e1.unlinkSync(__dirname + "/cyber.jpg"));
-  return _0x1dfa33(encodeURI(_0x476fbd[Math.floor(Math.random() * _0x476fbd.length)])).pipe(_0x47e3e1.createWriteStream(__dirname + "/cyber.jpg")).on("close", () => _0x2152c5());
-};
