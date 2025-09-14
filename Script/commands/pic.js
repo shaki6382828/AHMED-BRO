@@ -31,7 +31,7 @@ module.exports.run = async function({ api, event, args }) {
  }
  api.sendMessage({
  attachment: imgData,
- body: numberSearch + ' Searching 🔎 results for you. Your keyword: '+ keySearchs
+ body: numberSearch + ' |°з°| ʀᴇsᴜʟᴛs ғᴏʀ ʏᴏᴜ. ʏᴏᴜʀ ᴋᴇʏᴡᴏʀᴅ: '+ keySearchs
  }, event.threadID, event.messageID)
  for (let ii = 1; ii < parseInt(numberSearch); ii++) {
  fs.unlinkSync(__dirname + `/cache/${ii}.jpg`)
