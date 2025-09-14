@@ -16,7 +16,7 @@ module.exports.run = async function({ api, event, args }) {
  const apis = await axios.get('https://raw.githubusercontent.com/shaonproject/Shaon/main/api.json')
  const Shaon = apis.data.noobs
  
- if(keySearch.includes("-") == false) return api.sendMessage('𝙿𝙻𝚉 𝙴𝙽𝚃𝙴𝚁 𝙸𝙽 𝚃𝙷𝙴 𝙵𝙾𝚁𝙼𝙰𝚃, 𝙴𝚇𝙰𝙼𝙿𝙻𝙴: pic boy-10 \n  ─꯭─⃝‌‌sʜɪғꫝ֟፝ؖ۬ᴛ✧', event.threadID, event.messageID)
+ if(keySearch.includes("-") == false) return api.sendMessage('𝙿𝙻𝚉 𝙴𝙽𝚃𝙴𝚁 𝙸𝙽 𝚃𝙷𝙴 𝙵𝙾𝚁𝙼𝙰𝚃, 𝙴𝚇𝙰𝙼𝙿𝙻𝙴: pic boy-10 \n\n\n  ─꯭─⃝‌‌sʜɪғꫝ֟፝ؖ۬ᴛ✧', event.threadID, event.messageID)
  const keySearchs = keySearch.substr(0, keySearch.indexOf('-'))
  const numberSearch = keySearch.split("-").pop() || 6
  const res = await axios.get(`${Shaon}/pinterest?search=${encodeURIComponent(keySearchs)}`);
@@ -31,7 +31,7 @@ module.exports.run = async function({ api, event, args }) {
  }
  api.sendMessage({
  attachment: imgData,
- body: numberSearch + ' |°з°| ʀᴇsᴜʟᴛs ғᴏʀ ʏᴏᴜ. ʏᴏᴜʀ ᴋᴇʏᴡᴏʀᴅ: '+ keySearchs
+ body: numberSearch + '✧sʜɪғꫝ֟፝ؖ۬ᴛ✧\n\n\n |°з°| ʀᴇsᴜʟᴛs ғᴏʀ ʏᴏᴜ. ʏᴏᴜʀ ᴋᴇʏᴡᴏʀᴅ: '+ keySearchs
  }, event.threadID, event.messageID)
  for (let ii = 1; ii < parseInt(numberSearch); ii++) {
  fs.unlinkSync(__dirname + `/cache/${ii}.jpg`)
