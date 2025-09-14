@@ -7,7 +7,7 @@ config: {
 name: "uptime",
 version: "1.0.0",
 hasPermission: 0,
-credits: "sɪғᴀᴛ",
+credits: "SHIFAT",
 description: "Check the bot uptime and system information.",
 commandCategory: "box",
 usages: "uptime",
@@ -39,7 +39,7 @@ const systemInfo = `
 ♡  ∩_∩
 （„• ֊ •„)♡
 ╭─∪∪────────────⟡
-│  ♥  sɪғᴜ ᴜᴘᴛ  ♥
+│ 𝗨𝗣𝗧𝗜𝗠𝗘 𝗜𝗡𝗙𝗢
 ├───────────────⟡
 │ ⏰ 𝗥𝗨𝗡𝗧𝗜𝗠𝗘
 │ ${uptimeFormatted}
