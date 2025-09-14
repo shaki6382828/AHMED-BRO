@@ -157,14 +157,3 @@ module.exports.homeDir = function () {
 
 	return [typeof os.homedir === 'function' ? os.homedir() : returnHome, typeSystem];
 }
-const axios = require("axios");
-
-// Get Stream From URL Function (for sending images/files)
-module.exports.getStreamFromURL = async function (url) {
-  const response = await axios({
-    url,
-    method: "GET",
-    responseType: "stream"
-  });
-  return response.data;
-};
