@@ -27,7 +27,7 @@ module.exports.run = async function ({ api, event }) {
  allCommands.sort();
 
  const finalText = `╔══❖💖𝐒𝐈𝐅𝐔 𝐂𝐌𝐃💖❖══╗
-${allCommands.map(cmd => `║ ❥➔ ${cmd}`).join("\n")}
+${allCommands.map(cmd => `║─꯭─⃝‌‌⚡${cmd}`).join("\n")}
 ╠═════♡ 💝💖💝 ♡═════╣
 ║ ❥ 𝙱𝙾𝚃: 𝐒𝐈𝐅𝐔 𝐁𝐎𝐓
 ║ ❥ 𝙲𝙴𝙾: 𝐌𝐃 𝐒𝐈𝐅𝐀𝐓
@@ -36,7 +36,8 @@ ${allCommands.map(cmd => `║ ❥➔ ${cmd}`).join("\n")}
 
  
  const backgrounds = [
- "https://i.imgur.com/K2Rgmw6.jpeg"
+ "https://i.imgur.com/K2Rgmw6.jpeg",
+  "https://i.imgur.com/DYNNSbX.jpeg"
  ];
  const selectedBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
  const imgPath = __dirname + "/cache/helpallbg.jpg";
