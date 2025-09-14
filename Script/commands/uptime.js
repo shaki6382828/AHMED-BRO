@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "upt",
+  name: "uptime",
   version: "1.0.0",
   hasPermssion: 0,
   credits: "Kawsar Modified",
