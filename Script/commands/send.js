@@ -41,7 +41,7 @@ module.exports.run = async ({ api, event, args, Users }) => {
  try {
  await api.sendMessage(
  {
- body: `ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ✧(≖◡≖✿)✦───────•◈•───────✦\n\n${replyMsg.body || args.join(" ")}`,
+ body: `ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ✧(≖◡≖✿)\n✦───────•◈•───────✦\n\n${replyMsg.body || args.join(" ")}`,
  attachment: fs.createReadStream(filePath),
  },
  threadID
@@ -71,7 +71,7 @@ module.exports.run = async ({ api, event, args, Users }) => {
  if (threadID != event.threadID) {
  try {
  await api.sendMessage(
- `ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ✧(≖◡≖✿)✦───────•◈•───────✦\n\n${noticeText}`,
+ `ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ✧(≖◡≖✿)\n✦───────•◈•───────✦\n\n${noticeText}`,
  threadID
  );
  successCount++;
