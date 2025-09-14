@@ -7,7 +7,7 @@ config: {
 name: "uptime",
 version: "1.0.0",
 hasPermission: 0,
-credits: "SHIFAT",
+credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
 description: "Check the bot uptime and system information.",
 commandCategory: "box",
 usages: "uptime",
@@ -39,14 +39,14 @@ const systemInfo = `
 ♡  ∩_∩
 （„• ֊ •„)♡
 ╭─∪∪────────────⟡
-│ 𝗨𝗣𝗧𝗜𝗠𝗘 𝗜𝗡𝗙𝗢
+│───꯭─⃝‌‌𝗦𝗜𝗙𝗨 𝗨𝗣𝗧───
 ├───────────────⟡
-│ ⏰ 𝗥𝗨𝗡𝗧𝗜𝗠𝗘
+│ ⚡ ℝ𝕌ℕ𝕋𝕀𝕄𝔼
 │ ${uptimeFormatted}
-│ 💻 𝗠𝗘𝗠𝗢𝗥𝗬
-│ Total: ${totalMemoryGB} GB
-│ Free: ${freeMemoryGB} GB
-│ Used: ${usedMemoryGB} GB
+│ ✨ 𝕄𝔼𝕄𝕆ℝ𝕐
+│ 𝚃𝙾𝚃𝙰𝙻: ${totalMemoryGB} 𝙶𝙱
+│ 𝙵𝚁𝙴𝙴: ${freeMemoryGB} 𝙶𝙱
+│ 𝚄𝚂𝙴𝙳: ${usedMemoryGB} 𝙶𝙱
 ╰───────────────⟡
 `;
 
@@ -86,4 +86,4 @@ console.error("Edit failed:", error);
 }
 
 return sentMessage; // Return the sent message so we can update it later
-}
+  }
