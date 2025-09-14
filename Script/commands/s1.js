@@ -47,7 +47,8 @@ var abc = event.messageReply.attachments[0].url;
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage({body:" »✦ 𝐍𝐎𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐅𝐑𝐎𝐌 𝐀𝐃𝐌𝐈𝐍 𝐒𝐈𝐅𝐀𝐓 ✦«\n\n" + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
+			api.sendMessage({body:" ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ⸙✧(≖ ◡ ≖✿)
+✦───────•◈•───────✦\n\n" + args.join(` `),attachment: fs.createReadStream(path) }, idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
@@ -64,7 +65,8 @@ else {
 	for (const idThread of allThread) {
 		if (isNaN(parseInt(idThread)) || idThread == event.threadID) ""
 		else {
-			api.sendMessage("»✿ 𝐈𝐌𝐏𝐎𝐑𝐓𝐀𝐍𝐓 𝐍𝐎𝐓𝐈𝐅𝐈𝐂𝐀𝐓𝐈𝐎𝐍 𝐅𝐑𝐎𝐌 𝐀𝐃𝐌𝐈𝐍 𝐒𝐈𝐅𝐀𝐓 ✿«\n\n" + args.join(` `), idThread, (error, info) => {
+			api.sendMessage("ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ⸙✧(≖ ◡ ≖✿)
+✦───────•◈•───────✦\n\n" + args.join(` `), idThread, (error, info) => {
 				if (error) cantSend.push(idThread);
 			});
 			count++;
