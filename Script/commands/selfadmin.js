@@ -14,13 +14,14 @@ module.exports.config = {
 
 module.exports.languages = {
  "vi": {
- "listAdmin": '[Admin] Danh sách toàn bộ người điều hành bot: \n\n%1',
- "notHavePermssion": '[Admin] Bạn không đủ quyền hạn để có thể sử dụng chức năng "%1"',
- "addedNewAdmin": '[Admin] Đã thêm %1 người dùng trở thành người điều hành bot:\n\n%2',
- "removedAdmin": '[Admin] Đã gỡ bỏ %1 người điều hành bot:\n\n%2'
+ "listAdmin": '[Admin] Danh sÃ¡ch toÃ n bá»™ ngÆ°á»i Ä‘iá»u hÃ nh bot: \n\n%1',
+ "notHavePermssion": '[Admin] Báº¡n khÃ´ng Ä‘á»§ quyá»n háº¡n Ä‘á»ƒ cÃ³ thá»ƒ sá»­ dá»¥ng chá»©c nÄƒng "%1"',
+ "addedNewAdmin": '[Admin] ÄÃ£ thÃªm %1 ngÆ°á»i dÃ¹ng trá»Ÿ thÃ nh ngÆ°á»i Ä‘iá»u hÃ nh bot:\n\n%2',
+ "removedAdmin": '[Admin] ÄÃ£ gá»¡ bá» %1 ngÆ°á»i Ä‘iá»u hÃ nh bot:\n\n%2'
  },
  "en": {
  "listAdmin": '[Admin] Admin list: \n\n%1',
+ "notHavePermssion": '[Admin] You have no permission to use "%1"',
  "addedNewAdmin": '[Admin] Added %1 Admin :\n\n%2',
  "removedAdmin": '[Admin] Remove %1 Admin:\n\n%2'
  }
@@ -65,7 +66,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
  for (const id of mention) {
  ADMINBOT.push(id);
  config.ADMINBOT.push(id);
- listAdd.push(`[ ${id} ] » ${event.mentions[id]}`);
+ listAdd.push(`[ ${id} ] Â» ${event.mentions[id]}`);
  };
 
  writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
@@ -76,7 +77,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
  config.ADMINBOT.push(content[0]);
  const name = await Users.getNameUser(content[0]);
  writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
- return api.sendMessage(getText("addedNewAdmin", 1, `[ ${content[1]} ] » ${name}`), threadID, messageID);
+ return api.sendMessage(getText("addedNewAdmin", 1, `[ ${content[1]} ] Â» ${name}`), threadID, messageID);
  }
  else return global.utils.throwError(this.config.name, threadID, messageID);
  }
@@ -92,7 +93,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
  for (const id of mention) {
  ADMINBOT.push(id);
  config.ADMINBOT.push(id);
- listGod.push(`[ ${id} ] » ${event.mentions[id]}`);
+ listGod.push(`[ ${id} ] Â» ${event.mentions[id]}`);
  };
 
  writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
@@ -103,7 +104,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
  config.ADMINBOT.push(content[0]);
  const name = await Users.getNameUser(content[0]);
  writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
- return api.sendMessage(getText("addedNewAdmin", 1, `[ ${content[1]} ] » ${name}`), threadID, messageID);
+ return api.sendMessage(getText("addedNewAdmin", 1, `[ ${content[1]} ] Â» ${name}`), threadID, messageID);
  }
  else return global.utils.throwError(this.config.name, threadID, messageID);
  }
@@ -120,7 +121,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
  const index = config.ADMINBOT.findIndex(item => item == id);
  ADMINBOT.splice(index, 1);
  config.ADMINBOT.splice(index, 1);
- listAdd.push(`[ ${id} ] » ${event.mentions[id]}`);
+ listAdd.push(`[ ${id} ] Â» ${event.mentions[id]}`);
  };
 
  writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
@@ -132,7 +133,7 @@ module.exports.run = async function ({ api, event, args, Users, permssion, getTe
  config.ADMINBOT.splice(index, 1);
  const name = await Users.getNameUser(content[0]);
  writeFileSync(configPath, JSON.stringify(config, null, 4), 'utf8');
- return api.sendMessage(getText("removedAdmin", 1, `[ ${content[0]} ] » ${name}`), threadID, messageID);
+ return api.sendMessage(getText("removedAdmin", 1, `[ ${content[0]} ] Â» ${name}`), threadID, messageID);
  }
  else global.utils.throwError(this.config.name, threadID, messageID);
  }
