@@ -71,7 +71,7 @@ module.exports.run = async ({ api, event, args, Users }) => {
  if (threadID != event.threadID) {
  try {
  await api.sendMessage(
- `📢 নোটিশ (${senderName}):\n${noticeText}`,
+ `ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ғʀᴏᴍ ᴀᴅᴍɪɴ sʜɪғꫝ֟፝ؖ۬ᴛ✧(≖◡≖✿)✦───────•◈•───────✦\n\n${noticeText}`,
  threadID
  );
  successCount++;
