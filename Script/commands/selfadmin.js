@@ -21,7 +21,6 @@ module.exports.languages = {
  },
  "en": {
  "listAdmin": '[Admin] Admin list: \n\n%1',
- "notHavePermssion": '[Admin] You have no permission to use "%1"',
  "addedNewAdmin": '[Admin] Added %1 Admin :\n\n%2',
  "removedAdmin": '[Admin] Remove %1 Admin:\n\n%2'
  }
