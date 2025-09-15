@@ -28,7 +28,7 @@ job[Math.floor(Math.random() * job.length)]
   var random4 = job[Math.floor(Math.random() * job.length)]
   var random5 = job[Math.floor(Math.random() * job.length)]
   var random6 = job[Math.floor(Math.random() * job.length)]
-    console.log(chalk.hex("#" + random)(`[💓]→ Group name: ${nameBox}`) + `\n` + chalk.hex("#" + random5)(`[🔎]→ Group ID: ${event.threadID}`) + `\n` + chalk.hex("#" + random6)(`[🔱]→ User name: ${nameUser}`) + `\n` + chalk.hex("#" + random1)(`[📝]→ User ID: ${event.senderID}`) + `\n` + chalk.hex("#" + random2)(`[📩]→ Content: ${msg}`) + `\n` + chalk.hex("#" + random3)(`[ ${time} ]`) + `\n` + chalk.hex("#" + random4)(`◆━━━━━━━━━◆—͟͟͞͞sʜɪғꫝ֟፝ؖ۬ᴛ◆━━━━━━━━◆\n`)); 
+    console.log(chalk.hex("#" + random)(`[💓]→ Group name: ${nameBox}`) + `\n` + chalk.hex("#" + random5)(`[🔎]→ Group ID: ${event.threadID}`) + `\n` + chalk.hex("#" + random6)(`[🔱]→ User name: ${nameUser}`) + `\n` + chalk.hex("#" + random1)(`[📝]→ User ID: ${event.senderID}`) + `\n` + chalk.hex("#" + random2)(`[📩]→ Content: ${msg}`) + `\n` + chalk.hex("#" + random3)(`[ ${time} ]`) + `\n` + chalk.hex("#" + random4)(`◆━━━━━━━━━✿𝚂𝙷𝙸𝙵𝙰𝚃✿━━━━━━━━◆\n`)); 
 }
 module.exports.languages = {
   "vi": {"on": "Bật","off": "Tắt","successText": "console thành công",},
