@@ -1,36 +1,88 @@
-const moment = require("moment-timezone");
+const os = require("os");
 
-module.exports.config = {
-  name: "uptime",
-  version: "1.0.1",
-  hasPermssion: 0,
-  credits: "SHIFAT",
-  description: "Show bot uptime with animated progress bar",
-  commandCategory: "system",
-  usages: ",uptime",
-  cooldowns: 5,
+const startTime = new Date(); // Server start time
+
+module.exports = {
+  config: {
+    name: "uptime",
+    version: "1.0.1",
+    hasPermission: 0,
+    credits: "Fixed by SHIFAT",
+    description: "Check the bot uptime and system information.",
+    commandCategory: "box",
+    usages: "uptime",
+    prefix: "false",
+    dependencies: {},
+    cooldowns: 5
+  },
+
+  run: async function ({ api, event }) {
+    try {
+      // Show animated loading first
+      const loadingMessage = await displayLoading(api, event);
+
+      // Calculate uptime
+      const uptimeInSeconds = Math.floor((new Date() - startTime) / 1000);
+      const days = Math.floor(uptimeInSeconds / (3600 * 24));
+      const hours = Math.floor((uptimeInSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((uptimeInSeconds % 3600) / 60);
+      const secondsLeft = uptimeInSeconds % 60;
+      const uptimeFormatted = `${days}d ${hours}h ${minutes}m ${secondsLeft}s`;
+
+      // Calculate system information
+      const totalMemoryGB = (os.totalmem() / (1024 * 1024 * 1024)).toFixed(2);
+      const freeMemoryGB = (os.freemem() / (1024 * 1024 * 1024)).toFixed(2);
+      const usedMemoryGB = (totalMemoryGB - freeMemoryGB).toFixed(2);
+
+      // Create final message
+      const systemInfo = `
+♡  ∩_∩   （„• ֊ •„)♡
+╭─∪∪────────────⟡
+│───꯭─⃝‌‌𝗦𝗜𝗙𝗨 𝗕𝗢𝗧───
+├───────────────⟡
+│ 🖥️📡 ℝ𝕌ℕ𝕋𝕀𝕄𝔼
+│ ${uptimeFormatted}
+│ 💾📽️ 𝕄𝔼𝕄𝕆ℝ𝕐
+│ 𝚃𝙾𝚃𝙰𝙻: ${totalMemoryGB} 𝙶𝙱
+│ 𝙵𝚁𝙴𝙴: ${freeMemoryGB} 𝙶𝙱
+│ 𝚄𝚂𝙴𝙳: ${usedMemoryGB} 𝙶𝙱
+╰───────────────⟡
+`;
+
+      // Replace loading bar with system info
+      await api.editMessage(loadingMessage.messageID, systemInfo);
+
+    } catch (error) {
+      console.error("Error retrieving system information:", error);
+      api.sendMessage(
+        "Unable to retrieve system information.",
+        event.threadID,
+        event.messageID
+      );
+    }
+  }
 };
 
-module.exports.run = async ({ api, event }) => {
-  const time = process.uptime(); // কতক্ষণ চালু আছে সেকেন্ডে
-  const hours = Math.floor(time / 3600);
-  const minutes = Math.floor((time % 3600) / 60);
-  const seconds = Math.floor(time % 60);
+async function displayLoading(api, event) {
+  // Initial message with progress bar at 10%
+  const sentMessage = await api.sendMessage("[█░░░░░░░░░░] 10%", event.threadID);
 
-  let uptimeMsg = `🤖 BOT UPTIME:\n${hours}h ${minutes}m ${seconds}s\n\n`;
+  // Progress bar steps
+  const steps = [
+    { bar: "[███░░░░░░░░]", percent: "30%" },
+    { bar: "[██████░░░░░]", percent: "60%" },
+    { bar: "[█████████░░]", percent: "90%" },
+    { bar: "[███████████]", percent: "100%" },
+  ];
 
-  // Progress bar animation
-  let progress = 0;
-  const interval = setInterval(() => {
-    progress += 5; // প্রতি ধাপে 5% করে বাড়বে
-    if (progress > 100) progress = 100;
+  for (const step of steps) {
+    await new Promise(resolve => setTimeout(resolve, 1000)); // 1 sec delay
+    try {
+      await api.editMessage(sentMessage.messageID, `${step.bar} ${step.percent}`);
+    } catch (error) {
+      console.error("Edit failed:", error);
+    }
+  }
 
-    const filled = "█".repeat(progress / 5);
-    const empty = "░".repeat(20 - progress / 5);
-    const bar = `[${filled}${empty}] ${progress}%`;
-
-    api.editMessage(uptimeMsg + bar, event.messageID);
-
-    if (progress === 100) clearInterval(interval);
-  }, 500); // প্রতি 0.5 সেকেন্ডে আপডেট হবে
-};
+  return sentMessage; // Return sent message
+}
