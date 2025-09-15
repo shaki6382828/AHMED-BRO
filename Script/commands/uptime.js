@@ -5,9 +5,9 @@ const startTime = new Date(); // সার্ভার শুরু হওয়া
 module.exports = {
   config: {
     name: "uptime",
-    version: "1.0.2",
+    version: "1.0.3", // সংস্করণ আপডেট করা হলো
     hasPermission: 0,
-    credits: "Fixed by SHIFAT",
+    credits: "Fixed by SHIFAT & Gemini",
     description: "বটের আপটাইম এবং সিস্টেমের তথ্য দেখুন।",
     commandCategory: "box",
     usages: "uptime",
@@ -17,8 +17,11 @@ module.exports = {
 
   run: async function ({ api, event }) {
     try {
-      // প্রথমে লোডিং অ্যানিমেশন দেখানো হবে
-      const loadingMessage = await displayLoading(api, event);
+      // প্রথমে একটি লোডিং মেসেজ পাঠানো হলো
+      const loadingMessage = await api.sendMessage("⏳ | Uptime এবং সিস্টেমের তথ্য লোড হচ্ছে...", event.threadID);
+      
+      // একটি অ্যানিমেটেড লোডিং ফাংশন কল করা হলো
+      await displayLoading(api, loadingMessage.messageID);
 
       // আপটাইম গণনা
       const uptimeInSeconds = Math.floor((new Date() - startTime) / 1000);
@@ -48,8 +51,11 @@ module.exports = {
 ╰───────────────⟡
 `;
 
-      // লোডিং বারকে সিস্টেমের তথ্য দিয়ে পরিবর্তন করা হবে
-      await api.editMessage(systemInfo, loadingMessage.messageID);
+      // লোডিং সম্পন্ন হওয়ার পর চূড়ান্ত মেসেজটি পাঠানো
+      // একটি ছোট ডিলে দেওয়া হলো যাতে API ঠিকভাবে কাজ করতে পারে
+      setTimeout(() => {
+        api.editMessage(systemInfo, loadingMessage.messageID);
+      }, 500); // ০.৫ সেকেন্ড পর মেসেজ এডিট হবে
 
     } catch (error) {
       console.error("সিস্টেমের তথ্য আনতে সমস্যা হয়েছে:", error);
@@ -62,30 +68,27 @@ module.exports = {
   }
 };
 
-async function displayLoading(api, event) {
-  // 10% দিয়ে প্রোগ্রেস বার শুরু
-  const sentMessage = await api.sendMessage("[█░░░░░░░░░░] 10%", event.threadID);
-  
-  // messageID টি সরাসরি sentMessage অবজেক্ট থেকে নেওয়া হলো
-  const mid = sentMessage.messageID;
-
+// এই ফাংশনটি এখন শুধু অ্যানিমেশন দেখাবে
+async function displayLoading(api, messageID) {
   const steps = [
-    { bar: "[███░░░░░░░░]", percent: "30%" },
-    { bar: "[██████░░░░░]", percent: "60%" },
-    { bar: "[█████████░░]", percent: "90%" },
-    { bar: "[███████████]", percent: "100%" },
+    { bar: "[█░░░░░░░░░░] 10%", text: "প্রসেসিং শুরু হচ্ছে..." },
+    { bar: "[███░░░░░░░░]", percent: "30%", text: "আপটাইম গণনা করা হচ্ছে..." },
+    { bar: "[██████░░░░░]", percent: "60%", text: "মেমোরির তথ্য সংগ্রহ করা হচ্ছে..." },
+    { bar: "[█████████░░]", percent: "90%", text: "সবকিছু একত্রিত করা হচ্ছে..." },
+    { bar: "[███████████]", percent: "100%", text: "সম্পন্ন!" },
   ];
 
   for (const step of steps) {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // ১ সেকেন্ড অপেক্ষা
+    await new Promise(resolve => setTimeout(resolve, 800)); // প্রতিটি ধাপের মধ্যে ০.৮ সেকেন্ড অপেক্ষা
     try {
-      if (mid) {
-        await api.editMessage(`${step.bar} ${step.percent}`, mid);
+      if (messageID) {
+        await api.editMessage(`${step.bar} ${step.percent}\n${step.text}`, messageID);
       }
     } catch (error) {
+      // যদি মেসেজ এডিট করতে সমস্যা হয়, তাহলে এখানেই থেমে যাবে
+      // কিন্তু মূল ফাংশন কাজ চালিয়ে যাবে
       console.error("মেসেজ এডিট করতে সমস্যা:", error);
+      break; 
     }
   }
-
-  return { messageID: mid };
 }
