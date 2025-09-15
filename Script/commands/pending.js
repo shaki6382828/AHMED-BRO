@@ -12,20 +12,8 @@ module.exports.languages = {
   "en": {
     "invaildNumber": "❌ %1 is not a valid number",
     "cancelSuccess": "✅ Successfully rejected %1 group(s)!",
-    "notiBox1": " ᴋᴍɴ ᴀᴄʜᴏ sᴏʙᴀɪ 🙂",
-    "notiBox2": `
-❖⋆═══════𝗦𝗜𝗙𝗨 𝗕𝗢𝗧═════⋆❖
-𝐓𝐡𝐚𝐧𝐤 𝐲𝐨𝐮 𝐬𝐨 𝐦𝐮𝐜𝐡 𝐟𝐨𝐫 \n𝐚𝐝𝐝𝐢𝐧𝐠 𝐦𝐞 𝐭𝐨 𝐲𝐨𝐮𝐫 𝐠𝐫𝐨𝐮𝐩!
-❖⋆════════════════════⋆❖
-𝐂𝐨𝐦𝐦𝐚𝐧𝐝 𝐋𝐢𝐬𝐭:
-${global.config.PREFIX}help
-${global.config.PREFIX}info
-${global.config.PREFIX}admin
-❖⋆════════════════════⋆❖
- For any help or complaints,\n please contact admin ★\n
-➤ 𝐌𝐞𝐬𝐬𝐞𝐧𝐠𝐞𝐫: https://m.me/100078859776449
-❖⋆════════════════════⋆❖
-❖⋆═════𝙰𝙳𝙼𝙸𝙽 𝚂𝙷𝙸𝙵𝙰𝚃═════⋆❖`,
+    "notiBox1": " ᴋᴍɴ ᴀᴄʜᴏ sᴏʙᴀɪ 🫡",
+    "notiBox2": ` 🫲🏻🐸🫱🏻`,
     "approveSuccess": "✅ Successfully approved %1 group(s)!",
     "cantGetPendingList": "❌ Failed to retrieve pending list!",
     "returnListPending": "📝 𝗣𝗘𝗡𝗗𝗜𝗡𝗚 𝗟𝗜𝗦𝗧\n\nTotal groups awaiting approval: %1\n\n%2\n\nReply with the number(s) to approve or 'c' followed by number(s) to reject (e.g., 1 2 3 or c1 c2)",
