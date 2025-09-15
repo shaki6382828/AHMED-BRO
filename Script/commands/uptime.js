@@ -5,9 +5,9 @@ const startTime = new Date(); // সার্ভার শুরু হওয়া
 module.exports = {
   config: {
     name: "uptime",
-    version: "1.0.3", // সংস্করণ আপডেট করা হলো
+    version: "1.0.4", // সংস্করণ আপডেট করা হলো
     hasPermission: 0,
-    credits: "Fixed by SHIFAT & Gemini",
+    credits: "SHIFAT",
     description: "বটের আপটাইম এবং সিস্টেমের তথ্য দেখুন।",
     commandCategory: "box",
     usages: "uptime",
@@ -17,26 +17,45 @@ module.exports = {
 
   run: async function ({ api, event }) {
     try {
-      // প্রথমে একটি লোডিং মেসেজ পাঠানো হলো
-      const loadingMessage = await api.sendMessage("⏳ | Uptime এবং সিস্টেমের তথ্য লোড হচ্ছে...", event.threadID);
-      
-      // একটি অ্যানিমেটেড লোডিং ফাংশন কল করা হলো
-      await displayLoading(api, loadingMessage.messageID);
+      // প্রথমে একটি লোডিং মেসেজ পাঠিয়ে তার আইডি নেওয়া হলো
+      const messageID = (await api.sendMessage("⏳ | Uptime এবং সিস্টেমের তথ্য লোড হচ্ছে...", event.threadID)).messageID;
 
-      // আপটাইম গণনা
+      // একটি হেল্পার ফাংশন যা মেসেজ এডিট করবে এবং কিছুটা দেরি করবে
+      const editMessageWithDelay = async (text, delay) => {
+        await new Promise(resolve => setTimeout(resolve, delay));
+        // মেসেজ এডিট করার সময় কোনো সমস্যা হলে যেন ক্র্যাশ না করে
+        try {
+          await api.editMessage(text, messageID);
+        } catch (e) {
+          console.error("মেসেজ এডিট করা সম্ভব হয়নি:", e);
+        }
+      };
+
+      // ধাপ ১: প্রসেসিং শুরু
+      await editMessageWithDelay("[█░░░░░░░░░] 10%\nপ্রসেসিং শুরু হচ্ছে...", 800);
+
+      // ধাপ ২: আপটাইম গণনা
       const uptimeInSeconds = Math.floor((new Date() - startTime) / 1000);
       const days = Math.floor(uptimeInSeconds / (3600 * 24));
       const hours = Math.floor((uptimeInSeconds % (3600 * 24)) / 3600);
       const minutes = Math.floor((uptimeInSeconds % 3600) / 60);
       const secondsLeft = uptimeInSeconds % 60;
       const uptimeFormatted = `${days}d ${hours}h ${minutes}m ${secondsLeft}s`;
-
-      // সিস্টেমের তথ্য গণনা
+      await editMessageWithDelay("[███░░░░░░░] 30%\nআপটাইম গণনা করা হচ্ছে...", 800);
+      
+      // ধাপ ৩: মেমোরির তথ্য সংগ্রহ
       const totalMemoryGB = (os.totalmem() / (1024 * 1024 * 1024)).toFixed(2);
       const freeMemoryGB = (os.freemem() / (1024 * 1024 * 1024)).toFixed(2);
       const usedMemoryGB = (totalMemoryGB - freeMemoryGB).toFixed(2);
+      await editMessageWithDelay("[██████░░░░░] 60%\nমেমোরির তথ্য সংগ্রহ করা হচ্ছে...", 800);
 
-      // চূড়ান্ত বার্তা তৈরি
+      // ধাপ ৪: সবকিছু একত্রিত করা
+      await editMessageWithDelay("[█████████░] 90%\nসবকিছু একত্রিত করা হচ্ছে...", 800);
+
+      // ধাপ ৫: সম্পন্ন মেসেজ দেখানো
+      await editMessageWithDelay("[██████████] 100%\nসম্পন্ন!", 800);
+
+      // ধাপ ৬: চূড়ান্ত বার্তা তৈরি
       const systemInfo = `
 ♡  ∩_∩   （„• ֊ •„)♡
 ╭─∪∪────────────⟡
@@ -50,12 +69,9 @@ module.exports = {
 │ Used: ${usedMemoryGB} GB
 ╰───────────────⟡
 `;
-
-      // লোডিং সম্পন্ন হওয়ার পর চূড়ান্ত মেসেজটি পাঠানো
-      // একটি ছোট ডিলে দেওয়া হলো যাতে API ঠিকভাবে কাজ করতে পারে
-      setTimeout(() => {
-        api.editMessage(systemInfo, loadingMessage.messageID);
-      }, 500); // ০.৫ সেকেন্ড পর মেসেজ এডিট হবে
+      
+      // চূড়ান্ত তথ্য দেখানোর জন্য শেষবার মেসেজ এডিট করা
+      await editMessageWithDelay(systemInfo, 500);
 
     } catch (error) {
       console.error("সিস্টেমের তথ্য আনতে সমস্যা হয়েছে:", error);
@@ -67,28 +83,3 @@ module.exports = {
     }
   }
 };
-
-// এই ফাংশনটি এখন শুধু অ্যানিমেশন দেখাবে
-async function displayLoading(api, messageID) {
-  const steps = [
-    { bar: "[█░░░░░░░░░░] 10%", text: "প্রসেসিং শুরু হচ্ছে..." },
-    { bar: "[███░░░░░░░░]", percent: "30%", text: "আপটাইম গণনা করা হচ্ছে..." },
-    { bar: "[██████░░░░░]", percent: "60%", text: "মেমোরির তথ্য সংগ্রহ করা হচ্ছে..." },
-    { bar: "[█████████░░]", percent: "90%", text: "সবকিছু একত্রিত করা হচ্ছে..." },
-    { bar: "[███████████]", percent: "100%", text: "সম্পন্ন!" },
-  ];
-
-  for (const step of steps) {
-    await new Promise(resolve => setTimeout(resolve, 800)); // প্রতিটি ধাপের মধ্যে ০.৮ সেকেন্ড অপেক্ষা
-    try {
-      if (messageID) {
-        await api.editMessage(`${step.bar} ${step.percent}\n${step.text}`, messageID);
-      }
-    } catch (error) {
-      // যদি মেসেজ এডিট করতে সমস্যা হয়, তাহলে এখানেই থেমে যাবে
-      // কিন্তু মূল ফাংশন কাজ চালিয়ে যাবে
-      console.error("মেসেজ এডিট করতে সমস্যা:", error);
-      break; 
-    }
-  }
-}
