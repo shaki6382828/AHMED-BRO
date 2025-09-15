@@ -44,25 +44,8 @@ module.exports.run = async function({ api, event }) {
         ? fs.createReadStream(path.join(randomGifPath, allFiles[Math.floor(Math.random() * allFiles.length)])) 
         : null;
 
-      const messageBody = `╭•┄┅═══❁♥❁═══┅┄•╮
-   ᴀssᴀʟᴀᴍᴜ ᴀʟᴀɪᴋᴜᴍ
-╰•┄┅═══❁♥❁═══┅┄•╯
-
-𝐓𝐡𝐚𝐧𝐤 𝐲𝐨𝐮 𝐬𝐨 𝐦𝐮𝐜𝐡 𝐟𝐨𝐫 𝐚𝐝𝐝𝐢𝐧𝐠 𝐦𝐞 𝐭𝐨 𝐲𝐨𝐮𝐫 -𝐠𝐫𝐨𝐮𝐩-🖤
-𝐈 𝐰𝐢𝐥𝐥 𝐚𝐥𝐰𝐚𝐲𝐬 𝐬𝐞𝐫𝐯𝐞 𝐲𝐨𝐮 𝐢𝐧𝐚𝐡𝐚𝐥𝐥𝐚𝐡 🌺❤️
-
-𝐓𝐨 𝐯𝐢𝐞𝐰 𝐚𝐧𝐲 𝐜𝐨𝐦𝐦𝐚𝐧𝐝:
-${botPrefix}Help
-${botPrefix}Info
-${botPrefix}Admin
-
-★ যেকোনো অভিযোগ অথবা হেল্প এর জন্য এডমিন 𝐒𝐈𝐅𝐀𝐓 কে নক করতে পারেন ★
-
-➤𝐌𝐞𝐬𝐬𝐞𝐧𝐠𝐞𝐫: https://m.me/100078859776449
-
-
-❖⋆═══════════════════════⋆❖
-          𝐁𝐨𝐭 𝐎𝐰𝐧𝐞𝐫 ➢𝐌𝐃 𝐒𝐈𝐅𝐀𝐓`;
+      const messageBody = `𝚃𝙷𝙰𝙽𝙺𝚂 𝙵𝙾𝚁 𝙰𝙳𝙳𝙸𝙽𝙶 𝙼𝙴 🫲🏻🐸🫱🏻
+      `;
 
       if (selected) {
         api.sendMessage({ body: messageBody, attachment: selected }, threadID);
@@ -100,14 +83,14 @@ ${botPrefix}Admin
 ➤ উস্কানিমূলক কথা বা খারাপ ব্যবহার করবেন না।🚫
 ➤ গ্রুপ এডমিনের কথা শুনবেন ও রুলস মেনে চলবেন।✅
 
-›› প্রিয় {name},  
+›› প্রিয় {name},  \n
 আপনি এই গ্রুপের {soThanhVien} নম্বর মেম্বার!
 
 ›› গ্রুপ: {threadName}
 
 💌♥ 𝐖 𝐄 𝐋 𝐂 𝐎 𝐌 𝐄 ♥💌
 ╭─╼╾──╼🌸╾──╼╾──╮
-❖──♥𝕊𝕀𝔽𝕌 𝔹𝕆𝕋♥──❖
+    ❖──♥𝕊𝕀𝔽𝕌 𝔹𝕆𝕋♥──❖
 ╰──╼╾─╼🌸╾──╼╾──╯
 
 ❖⋆══════════════════════════⋆❖` : threadData.customJoin;
