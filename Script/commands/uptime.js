@@ -1,27 +1,26 @@
 const os = require("os");
 
-const startTime = new Date(); // Server start time
+const startTime = new Date(); // সার্ভার শুরু হওয়ার সময়
 
 module.exports = {
   config: {
     name: "uptime",
-    version: "1.0.1",
+    version: "1.0.2",
     hasPermission: 0,
     credits: "Fixed by SHIFAT",
-    description: "Check the bot uptime and system information.",
+    description: "বটের আপটাইম এবং সিস্টেমের তথ্য দেখুন।",
     commandCategory: "box",
     usages: "uptime",
     prefix: "false",
-    dependencies: {},
     cooldowns: 5
   },
 
   run: async function ({ api, event }) {
     try {
-      // Show animated loading first
+      // প্রথমে লোডিং অ্যানিমেশন দেখানো হবে
       const loadingMessage = await displayLoading(api, event);
 
-      // Calculate uptime
+      // আপটাইম গণনা
       const uptimeInSeconds = Math.floor((new Date() - startTime) / 1000);
       const days = Math.floor(uptimeInSeconds / (3600 * 24));
       const hours = Math.floor((uptimeInSeconds % (3600 * 24)) / 3600);
@@ -29,33 +28,33 @@ module.exports = {
       const secondsLeft = uptimeInSeconds % 60;
       const uptimeFormatted = `${days}d ${hours}h ${minutes}m ${secondsLeft}s`;
 
-      // Calculate system information
+      // সিস্টেমের তথ্য গণনা
       const totalMemoryGB = (os.totalmem() / (1024 * 1024 * 1024)).toFixed(2);
       const freeMemoryGB = (os.freemem() / (1024 * 1024 * 1024)).toFixed(2);
       const usedMemoryGB = (totalMemoryGB - freeMemoryGB).toFixed(2);
 
-      // Create final message
+      // চূড়ান্ত বার্তা তৈরি
       const systemInfo = `
 ♡  ∩_∩   （„• ֊ •„)♡
 ╭─∪∪────────────⟡
-│───꯭─⃝‌‌𝗦𝗜𝗙𝗨 𝗕𝗢𝗧───
+│ 𝗨𝗣𝗧𝗜𝗠𝗘 𝗜𝗡𝗙𝗢
 ├───────────────⟡
-│ 🖥️📡 ℝ𝕌ℕ𝕋𝕀𝕄𝔼
+│ ⏰ 𝗥𝗨𝗡𝗧𝗜𝗠𝗘
 │ ${uptimeFormatted}
-│ 💾📽️ 𝕄𝔼𝕄𝕆ℝ𝕐
-│ 𝚃𝙾𝚃𝙰𝙻: ${totalMemoryGB} 𝙶𝙱
-│ 𝙵𝚁𝙴𝙴: ${freeMemoryGB} 𝙶𝙱
-│ 𝚄𝚂𝙴𝙳: ${usedMemoryGB} 𝙶𝙱
+│ 💻 𝗠𝗘𝗠𝗢𝗥𝗬
+│ Total: ${totalMemoryGB} GB
+│ Free: ${freeMemoryGB} GB
+│ Used: ${usedMemoryGB} GB
 ╰───────────────⟡
 `;
 
-      // Replace loading bar with system info
-      await api.editMessage(loadingMessage.messageID, systemInfo);
+      // লোডিং বারকে সিস্টেমের তথ্য দিয়ে পরিবর্তন করা হবে
+      await api.editMessage(systemInfo, loadingMessage.messageID);
 
     } catch (error) {
-      console.error("Error retrieving system information:", error);
+      console.error("সিস্টেমের তথ্য আনতে সমস্যা হয়েছে:", error);
       api.sendMessage(
-        "Unable to retrieve system information.",
+        "সিস্টেমের তথ্য আনা সম্ভব হচ্ছে না।",
         event.threadID,
         event.messageID
       );
@@ -64,10 +63,12 @@ module.exports = {
 };
 
 async function displayLoading(api, event) {
-  // Initial message with progress bar at 10%
+  // 10% দিয়ে প্রোগ্রেস বার শুরু
   const sentMessage = await api.sendMessage("[█░░░░░░░░░░] 10%", event.threadID);
+  
+  // messageID টি সরাসরি sentMessage অবজেক্ট থেকে নেওয়া হলো
+  const mid = sentMessage.messageID;
 
-  // Progress bar steps
   const steps = [
     { bar: "[███░░░░░░░░]", percent: "30%" },
     { bar: "[██████░░░░░]", percent: "60%" },
@@ -76,13 +77,15 @@ async function displayLoading(api, event) {
   ];
 
   for (const step of steps) {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // 1 sec delay
+    await new Promise(resolve => setTimeout(resolve, 1000)); // ১ সেকেন্ড অপেক্ষা
     try {
-      await api.editMessage(sentMessage.messageID, `${step.bar} ${step.percent}`);
+      if (mid) {
+        await api.editMessage(`${step.bar} ${step.percent}`, mid);
+      }
     } catch (error) {
-      console.error("Edit failed:", error);
+      console.error("মেসেজ এডিট করতে সমস্যা:", error);
     }
   }
 
-  return sentMessage; // Return sent message
+  return { messageID: mid };
 }
