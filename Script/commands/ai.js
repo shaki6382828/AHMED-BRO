@@ -74,18 +74,12 @@ module.exports.run = async function ({ api, event, args }) {
   try {
     const question = args.join(" ").trim();
     if (!question) {
-      return api.sendMessage(" ♡  ∩_∩                         ∩_∩  ♡
-（„• ֊ •„)♡sʜɪғꫝ֟፝ؖ۬ᴛ ꫝ֟፝ؖ۬ɪ(„• ֊ •„)
-⟡─∪∪─────────∪∪───⟡
-│─𝙷𝙾𝚆 𝙲𝙰𝙽 𝙸 𝙷𝙴𝙻𝙿 𝚄 𝚂𝙸𝚁─│
-⟡─────────────────⟡
-│(¬◡¬)✧    (¬◡¬)✧    (¬◡¬)✧│
-⟡─────────────────⟡", event.threadID, event.messageID);
+      return api.sendMessage(" ♡  ∩_∩                         ∩_∩  ♡\n（„• ֊ •„)♡sʜɪғꫝ֟፝ؖ۬ᴛ ꫝ֟፝ؖ۬ɪ(„• ֊ •„) \n⟡─∪∪─────────∪∪───⟡\n│─𝙷𝙾𝚆 𝙲𝙰𝙽 𝙸 𝙷𝙴𝙻𝙿 𝚄 𝚂𝙸𝚁─│ \n⟡─────────────────⟡\n│(¬◡¬)✧    (¬◡¬)✧    (¬◡¬)✧│ \n⟡─────────────────⟡", event.threadID, event.messageID);
     }
     
     api.sendTypingIndicator(event.threadID, true);
     const loadingMessage = await new Promise(resolve => {
-      api.sendMessage("just a second......", event.threadID, (err, info) => resolve(info || null));
+      api.sendMessage(" ⟡───────⟡───────⟡\njust a second......\n⟡───────⟡───────⟡", event.threadID, (err, info) => resolve(info || null));
     });
 
     if (!conversationMemory.has(event.threadID)) {
