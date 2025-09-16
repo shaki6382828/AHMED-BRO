@@ -1,5 +1,4 @@
 const axios = require("axios");
-const usersData = require("./usersData.js");
 
 async function getBaseApi() {
   try {
@@ -26,21 +25,22 @@ module.exports.config = {
   }
 };
 
-// মূল কুইজ রান ফাংশন
 module.exports.run = async function ({ api, event, args }) {
-  if (!global.client) global.client = {};
-  if (!global.client.handleReply) global.client.handleReply = [];
-
   try {
     const input = (args[0] || "").toLowerCase();
     const category = input === "en" || input === "english" ? "english" : "bangla";
 
     const baseApi = await getBaseApi();
-    if (!baseApi) return api.sendMessage("❌ বেস API লোড হয়নি!", event.threadID, event.messageID);
+    if (!baseApi) {
+      return api.sendMessage("❌ বেস API লোড হয়নি!", event.threadID, event.messageID);
+    }
 
     const res = await axios.get(`${baseApi}/api/quiz?category=${category}`);
     const quiz = res.data;
-    if (!quiz) return api.sendMessage("❌ Quiz পাওয়া যায়নি!", event.threadID, event.messageID);
+
+    if (!quiz) {
+      return api.sendMessage("❌ এই ক্যাটাগরির জন্য কোনো Quiz পাওয়া যায়নি।", event.threadID, event.messageID);
+    }
 
     const { question, correctAnswer, options } = quiz;
     const { a, b, c, d } = options;
@@ -57,7 +57,6 @@ module.exports.run = async function ({ api, event, args }) {
     api.sendMessage(quizMsg, event.threadID, (err, info) => {
       if (err) return console.error(err);
 
-      // handleReply যোগ করা
       global.client.handleReply.push({
         name: this.config.name,
         messageID: info.messageID,
@@ -65,37 +64,38 @@ module.exports.run = async function ({ api, event, args }) {
         correctAnswer
       });
 
-      // 40 সেকেন্ড পরে মেসেজ আনসেন্ড
-      setTimeout(() => api.unsendMessage(info.messageID).catch(() => {}), 40000);
+      setTimeout(() => {
+        api.unsendMessage(info.messageID);
+      }, 40000);
     }, event.messageID);
 
   } catch (error) {
     console.error(error);
-    api.sendMessage("❌ কুইজ লোড করতে সমস্যা হয়েছে!", event.threadID, event.messageID);
+    api.sendMessage("❌ কুইজ লোড করতে সমস্যা হয়েছে, আবার চেষ্টা করো।", event.threadID, event.messageID);
   }
 };
 
-// handleReply ফাংশন
 module.exports.handleReply = async function ({ api, event, handleReply }) {
-  const { correctAnswer, author, messageID } = handleReply;
+  const { correctAnswer, author } = handleReply;
 
   if (event.senderID !== author) {
     return api.sendMessage("❌ এই কুইজ তোমার জন্য নয়।", event.threadID, event.messageID);
   }
 
-  await api.unsendMessage(messageID).catch(() => {});
-  const userAnswer = (event.body || "").trim().toLowerCase();
+  await api.unsendMessage(handleReply.messageID);
+  const userAnswer = event.body.trim().toLowerCase();
 
-  const rewardCoins = module.exports.config.envConfig.rewardCoins;
-  const rewardExp = module.exports.config.envConfig.rewardExp;
+  const { rewardCoins, rewardExp } = module.exports.config.envConfig;
 
   if (userAnswer === correctAnswer.toLowerCase()) {
-    usersData.addCoins(event.senderID, rewardCoins);
-    usersData.addExp(event.senderID, rewardExp);
+    // ✅ এখানে কয়েন/EXP বাড়ানোর লজিক বসাও
+    // 👉 তোমার বটে যেভাবে কয়েন/EXP অ্যাড হয় সেই ফাংশন বসাও
+    // উদাহরণ:
+    // await Currencies.increaseMoney(event.senderID, rewardCoins);
+    // await Currencies.increaseExp(event.senderID, rewardExp);
 
-    const user = usersData.get(event.senderID);
     api.sendMessage(
-      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\nবর্তমান ব্যালেন্স:\n💰 কয়েন: ${user.coins}\n⭐ EXP: ${user.exp}`,
+      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\n(⚠️ কয়েন/EXP আপডেট করতে তোমার বটের সঠিক ফাংশন বসাও!)`,
       event.threadID,
       event.messageID
     );
