@@ -4,7 +4,7 @@ module.exports.config = {
   name: "help",
   version: "2.0.0",
   hasPermssion: 0,
-  credits: "SHIFAT (Modified)",
+  credits: "SHIFAT", // 🄳🄾🄽🅃 🄲🄷🄰🄽🄶🄴 🄼🅈 🄲🅁🄴🄳🄸🅃😒
   description: "Show bot command list by category",
   commandCategory: "system",
   usages: "[command name]",
@@ -63,17 +63,17 @@ module.exports.run = function ({ api, event, args, getText }) {
     categories[cat].sort((a, b) => a.localeCompare(b));
   }
 
-  let msg = "╭━━━『 ✨ 𝐒𝐇𝐈𝐅𝐀𝐓 𝐁𝐎𝐓 𝐂𝐌𝐃 𝐋𝐈𝐒𝐓 ✨ 』━━━╮\n\n";
+  let msg = " ♡   ∩_∩                            ∩_∩   ♡\n  （„• ֊ •„) ♡ sʜɪғꫝ֟፝ؖ۬ᴛ  ♡ („• ֊ •„) \n⟡──∪∪──────────∪∪───⟡\n│✨────꯭─⃝‌‌𝗦𝗜𝗙𝗨 𝗖𝗠𝗗────✨│\n ⟡───────────────────⟡\n│\n\n";
 
   for (const cat in categories) {
-    msg += `𖤐 『 ${cat.toUpperCase()} 』 𖤐\n`;
-    msg += "✦ " + categories[cat].join("   ✦ ") + "\n";
-    msg += "✦••┈┈┈┈┈┈┈┈┈┈┈┈••✦\n\n";
+    msg += `✿ 『 ${cat.toUpperCase()} 』 ✿\n`;
+    msg += "✦✦ " + categories[cat].join(" ✦✦ ") + "\n";
+    msg += "✦♡••┈┈┈┈┈┈┈┈┈┈┈┈••♡✦\n\n";
   }
 
-  msg += `📌 𝗧𝗼𝘁𝗮𝗹 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀: ${commands.size}\n`;
-  msg += `❖ 𝗨𝘀𝗲: ${prefix}help [command]\n\n`;
-  msg += `✦••┈┈┈┈┈┈┈┈『 🩶 𝐒𝐇𝐈𝐅𝐀𝐓_𝐁𝐎𝐓 🎀 』┈┈┈┈┈┈┈┈••✦`;
+  msg += `✨𝚃𝙾𝚃𝙰𝙻 𝙲𝙼𝙳: ${commands.size}\n`;
+  msg += `✨𝚄𝚂𝙴: ${prefix}help [command]\n\n`;
+  msg += `✦••••┈┈┈┈┈┈┈┈••••✦\n『 🎀 𝐒𝐇𝐈𝐅𝐀𝐓_𝐁𝐎𝐓 🎀 』\n✦••••┈┈┈┈┈┈┈┈••••✦`;
 
   return api.sendMessage(msg, threadID, async (error, info) => {
     if (autoUnsend) {
