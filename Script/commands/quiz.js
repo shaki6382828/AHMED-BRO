@@ -1,5 +1,6 @@
 const axios = require("axios");
-const usersData = require("./usersData.js"); // যদি quiz.js আর usersData.js একই ফোল্ডারে থাকে
+const usersData = require("./usersData.js");
+
 async function getBaseApi() {
   try {
     const res = await axios.get("https://raw.githubusercontent.com/mahmudx7/exe/main/baseApiUrl.json");
@@ -76,35 +77,34 @@ module.exports.run = async function ({ api, event, args }) {
 };
 
 module.exports.handleReply = async function ({ api, event, handleReply }) {
-  const { correctAnswer, author } = handleReply;
+  const { correctAnswer, author, messageID } = handleReply;
 
   if (event.senderID !== author) {
     return api.sendMessage("❌ এই কুইজ তোমার জন্য নয়।", event.threadID, event.messageID);
   }
 
-  await api.unsendMessage(handleReply.messageID);
+  await api.unsendMessage(messageID);
   const userAnswer = event.body.trim().toLowerCase();
 
-  const { rewardCoins, rewardExp } = module.exports.config.envConfig;
+  const rewardCoins = module.exports.config.envConfig.rewardCoins;
+  const rewardExp = module.exports.config.envConfig.rewardExp;
 
-  if (userReply === correctAnswer.toLowerCase()) {
-  const rewardCoins = 500;
-  const rewardExp = 121;
+  if (userAnswer === correctAnswer.toLowerCase()) {
+    usersData.addCoins(event.senderID, rewardCoins);
+    usersData.addExp(event.senderID, rewardExp);
 
-  usersData.addCoins(event.senderID, rewardCoins);
-  usersData.addExp(event.senderID, rewardExp);
+    const user = usersData.get(event.senderID);
 
-  const user = usersData.get(event.senderID);
-
-  api.sendMessage(
-    `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\nবর্তমান ব্যালেন্স:\n💰 কয়েন: ${user.coins}\n⭐ EXP: ${user.exp}`,
-    event.threadID,
-    event.messageID
-  );
-} else {
-  api.sendMessage(
-    `❌ ভুল উত্তর!\nসঠিক উত্তর ছিল: ${correctAnswer}`,
-    event.threadID,
-    event.messageID
-  );
+    api.sendMessage(
+      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\nবর্তমান ব্যালেন্স:\n💰 কয়েন: ${user.coins}\n⭐ EXP: ${user.exp}`,
+      event.threadID,
+      event.messageID
+    );
+  } else {
+    api.sendMessage(
+      `❌ ভুল উত্তর!\nসঠিক উত্তর ছিল: ${correctAnswer}`,
+      event.threadID,
+      event.messageID
+    );
   }
+};
