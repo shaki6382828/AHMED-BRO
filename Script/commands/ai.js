@@ -1,133 +1,115 @@
 const axios = require("axios");
 
+// 🔴🔴🔴 ধাপ ৩: আপনার Gemini API Key এখানে যোগ করুন 🔴🔴🔴
+// নিচের "" এর ভেতরে আপনার কপি করা API Key টি পেস্ট করুন।
+const GEMINI_API_KEY = "AIzaSyABjIhqaAj5hxLmnPzeSuIPJ6fxVIKgIQ8";
+
 // প্রতিটি থ্রেড (চ্যাট) অনুযায়ী মেমোরি রাখা হবে
 const conversationMemory = new Map();
 
-// কনফিগারেশন
 module.exports.config = {
   name: "ai",
-  version: "1.2.0",
+  version: "2.0.0", // Stable Version
   hasPermssion: 0,
-  credits: "SHIFAT & Gemini (Improved)",
-  description: "AI chat with improved memory management and response parsing.",
+  credits: "SHIFAT & Gemini (Stable Version)",
+  description: "AI chat using Google's reliable Gemini API.",
   commandCategory: "AI",
   usages: "[prompt]",
-  cooldowns: 2,
+  cooldowns: 3,
 };
 
-// HuggingFace থেকে উত্তর আনার জন্য Helper ফাংশন
-async function fetchFromHuggingFace(model, messages) {
-  try {
-    // আগের সব মেসেজ একত্রিত করে একটি প্রম্পট তৈরি করা হচ্ছে
-    const prompt = messages.map(m => `${m.role}: ${m.content}`).join("\n") + "\nassistant:";
+// Gemini API থেকে উত্তর আনার জন্য ফাংশন
+async function fetchFromGemini(history, threadID) {
+  // Gemini-এর জন্য কথোপকথনের ফর্ম্যাট তৈরি করা
+  const contents = history.map(turn => ({
+    role: turn.role === "user" ? "user" : "model",
+    parts: [{ text: turn.content }]
+  }));
 
+  // Gemini সবসময় শেষে ইউজারের প্রশ্ন আশা করে, তাই আগের মডেলের উত্তর বাদ দেওয়া হলো যদি থাকে
+  if (contents.length > 1 && contents[contents.length - 1].role === 'model') {
+    contents.pop();
+  }
+
+  try {
+    console.log(`[AI] 🧠 ${threadID} - Gemini API ব্যবহার করে উত্তর খোঁজা হচ্ছে...`);
+    
     const response = await axios.post(
-      `https://api-inference.huggingface.co/models/${model}`,
-      { inputs: prompt },
-      { headers: { "Content-Type": "application/json" }, timeout: 20000 }
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
+      { contents },
+      { headers: { "Content-Type": "application/json" }, timeout: 60000 }
     );
 
-    let generatedText = response.data[0]?.generated_text?.trim();
-
-    // 🟢 মূল উন্নতি: মডেলের উত্তর থেকে শুধু নতুন অংশটুকু বের করা
-    // যদি মডেল পুরো প্রম্পটসহ উত্তর দেয়, তবে আমরা শুধু নতুন উত্তরটি নেব।
-    if (generatedText && generatedText.startsWith(prompt)) {
-      generatedText = generatedText.substring(prompt.length).trim();
-    }
+    const text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
     
-    // অনেক সময় মডেল উত্তরে "assistant:" অংশটি আবার যোগ করে, সেটি বাদ দেওয়া হলো
-    if (generatedText && generatedText.toLowerCase().startsWith("assistant:")) {
-        generatedText = generatedText.substring("assistant:".length).trim();
+    if (text) {
+      console.log(`[AI] ✅ ${threadID} - Gemini API থেকে সফলভাবে উত্তর পাওয়া গেছে।`);
+      return text.trim();
+    } else {
+      console.error(`[AI] ❌ ${threadID} - Gemini API থেকে কোনো উত্তর পাওয়া যায়নি। Response:`, response.data);
+      return "দুঃখিত, আমি উত্তরটি ঠিকভাবে প্রসেস করতে পারিনি।";
     }
 
-    return generatedText;
-  } catch (err) {
-    console.error(`❌ ${model} failed:`, err.message);
-    return null; // ব্যর্থ হলে null রিটার্ন করা হবে
+  } catch (error) {
+    const errorMessage = error.response ? error.response.data.error.message : error.message;
+    console.error(`[AI] ❌ ${threadID} - Gemini API তে সমস্যা হয়েছে:`, errorMessage);
+    return `দুঃখিত, একটি সমস্যা হয়েছে। API Error: ${errorMessage}`;
   }
 }
 
 // মূল ফাংশন
 module.exports.run = async function ({ api, event, args }) {
+  // API Key সেট করা হয়েছে কিনা তা পরীক্ষা করা
+  if (!GEMINI_API_KEY || GEMINI_API_KEY === "") {
+    return api.sendMessage("❌ Gemini API Key সেট করা হয়নি!\n\nদয়া করে ai.js ফাইলের শুরুতে আপনার নিজের API Key যোগ করুন।\n\nKey পাওয়ার জন্য এখানে যান: https://aistudio.google.com/app/apikey", event.threadID, event.messageID);
+  }
+
   try {
     const question = args.join(" ").trim();
     if (!question) {
-      return api.sendMessage(
-        "❌ দয়া করে একটি প্রশ্ন লিখুন।\nউদাহরণ: ai জীবনের মানে কি?",
-        event.threadID,
-        event.messageID
-      );
+      return api.sendMessage("❌ দয়া করে একটি প্রশ্ন লিখুন।\nউদাহরণ: ai বাংলাদেশের রাজধানীর নাম কি?", event.threadID, event.messageID);
     }
+    
+    console.log(`[AI] 💬 ${event.threadID} - নতুন প্রশ্ন: "${question}"`);
 
-    // Typing Indicator এবং লোডিং মেসেজ পাঠানো
     api.sendTypingIndicator(event.threadID, true);
     const loadingMessage = await new Promise(resolve => {
-      api.sendMessage("🤖 চিন্তা করছি...", event.threadID, (err, info) => {
+      api.sendMessage("🤖 উত্তর তৈরি করছি...", event.threadID, (err, info) => {
         resolve(info || null);
       });
     });
 
-    // পুরোনো কথোপকথন বের করা বা নতুন করে শুরু করা
     if (!conversationMemory.has(event.threadID)) {
       conversationMemory.set(event.threadID, []);
     }
     const history = conversationMemory.get(event.threadID);
     
-    // 🟢 মেমোরি ম্যানেজমেন্ট: পুরোনো মেসেজ কেটে দিয়ে মেমোরি হালকা রাখা
-    // এখানে শেষ ১০টি মেসেজ মনে রাখা হবে
     const MAX_HISTORY_LENGTH = 10;
     while (history.length > MAX_HISTORY_LENGTH) {
-        history.shift(); // সবচেয়ে পুরোনো মেসেজ বাদ দেওয়া হলো
+      history.shift();
     }
 
-    // ইউজারের প্রশ্ন মেমোরিতে যোগ করা
     history.push({ role: "user", content: question });
 
-    let reply = null;
+    // Gemini API থেকে উত্তর আনা
+    let reply = await fetchFromGemini(history, event.threadID);
 
-    // Primary Model: চেষ্টা করার জন্য একটি ভালো মডেল (যেমন Mistral)
-    reply = await fetchFromHuggingFace("mistralai/Mistral-7B-Instruct-v0.2", history);
-
-    // Fallback 1: BLOOM
-    if (!reply) {
-      console.log("Fallback to BLOOM...");
-      reply = await fetchFromHuggingFace("bigscience/bloom", history);
-    }
-
-    // Fallback 2: GPT-2
-    if (!reply) {
-      console.log("Fallback to GPT-2...");
-      reply = await fetchFromHuggingFace("gpt2", history);
-    }
-
-    // Typing Indicator বন্ধ করা
     api.sendTypingIndicator(event.threadID, false);
     
-    // লোডিং মেসেজ ডিলিট করা
     if (loadingMessage) {
       api.unsendMessage(loadingMessage.messageID);
     }
 
     if (!reply) {
-      return api.sendMessage(
-        "😅 দুঃখিত, এখন কোনো উত্তর দিতে পারছি না। আবার চেষ্টা করুন।",
-        event.threadID,
-        event.messageID
-      );
+      return api.sendMessage("😅 দুঃখিত, Gemini API থেকে কোনো উত্তর পাওয়া যায়নি। কিছুক্ষণ পর আবার চেষ্টা করুন।", event.threadID, event.messageID);
     }
-
-    // AI-এর উত্তর মেমোরিতে যোগ করা
+    
     history.push({ role: "assistant", content: reply });
-
-    // Messenger-এর 2000 অক্ষরের লিমিট অনুযায়ী উত্তর ছোট করা
-    const finalReply = reply.length > 2000 ? reply.substring(0, 2000) + "..." : reply;
-
-    // ফাইনাল উত্তর পাঠানো
-    api.sendMessage(finalReply, event.threadID, event.messageID);
+    api.sendMessage(reply, event.threadID, event.messageID);
 
   } catch (error) {
-    console.error("AI command fatal error:", error);
+    console.error("[AI] Fatal Error:", error);
     api.sendTypingIndicator(event.threadID, false);
-    api.sendMessage("⚠️ কিছু একটা সমস্যা হয়েছে, দয়া করে আবার চেষ্টা করুন।", event.threadID, event.messageID);
+    api.sendMessage("⚠️ একটি অপ্রত্যাশিত সমস্যা হয়েছে। বিস্তারিত জানতে কনসোল চেক করুন।", event.threadID, event.messageID);
   }
 };
