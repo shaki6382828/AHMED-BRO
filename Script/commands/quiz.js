@@ -12,16 +12,20 @@ async function getBaseApi() {
 
 module.exports.config = {
   name: "quiz",
-  version: "1.0.0",
+  version: "2.1.0",
   hasPermssion: 0,
   credits: "SHIFAT",
   description: "Random quiz খেলো",
   commandCategory: "game",
   usages: "[en/bn]",
-  cooldowns: 5
+  cooldowns: 5,
+  envConfig: {
+    rewardCoins: 500,
+    rewardExp: 100
+  }
 };
 
-module.exports.run = async function ({ api, event, args, usersData }) {
+module.exports.run = async function ({ api, event, args }) {
   try {
     const input = (args[0] || "").toLowerCase();
     const category = input === "en" || input === "english" ? "english" : "bangla";
@@ -60,7 +64,6 @@ module.exports.run = async function ({ api, event, args, usersData }) {
         correctAnswer
       });
 
-      // 40 সেকেন্ড পর প্রশ্ন ডিলিট
       setTimeout(() => {
         api.unsendMessage(info.messageID);
       }, 40000);
@@ -72,7 +75,7 @@ module.exports.run = async function ({ api, event, args, usersData }) {
   }
 };
 
-module.exports.handleReply = async function ({ api, event, handleReply, usersData }) {
+module.exports.handleReply = async function ({ api, event, handleReply }) {
   const { correctAnswer, author } = handleReply;
 
   if (event.senderID !== author) {
@@ -82,19 +85,17 @@ module.exports.handleReply = async function ({ api, event, handleReply, usersDat
   await api.unsendMessage(handleReply.messageID);
   const userAnswer = event.body.trim().toLowerCase();
 
-  if (userAnswer === correctAnswer.toLowerCase()) {
-    const rewardCoins = 500;
-    const rewardExp = 100;
+  const { rewardCoins, rewardExp } = module.exports.config.envConfig;
 
-    const userData = await usersData.get(author);
-    await usersData.set(author, {
-      money: userData.money + rewardCoins,
-      exp: userData.exp + rewardExp,
-      data: userData.data
-    });
+  if (userAnswer === correctAnswer.toLowerCase()) {
+    // ✅ এখানে কয়েন/EXP বাড়ানোর লজিক বসাও
+    // 👉 তোমার বটে যেভাবে কয়েন/EXP অ্যাড হয় সেই ফাংশন বসাও
+    // উদাহরণ:
+    // await Currencies.increaseMoney(event.senderID, rewardCoins);
+    // await Currencies.increaseExp(event.senderID, rewardExp);
 
     api.sendMessage(
-      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉`,
+      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\n(⚠️ কয়েন/EXP আপডেট করতে তোমার বটের সঠিক ফাংশন বসাও!)`,
       event.threadID,
       event.messageID
     );
