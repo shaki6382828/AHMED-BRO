@@ -1,99 +1,89 @@
-// help.js
-// This module provides a dynamic, scalable, and fully asynchronous help command.
-// It uses fs and request for maximum compatibility with bot environments.
-
-const fs = require("fs-extra");
-const request = require("request");
-
-// --- Configuration for the command ---
-module.exports.config = {
-  name: "help",
-  version: "2.1.0", // Updated version for the fix and improvement
-  hasPermssion: 0,
-  credits: "𝐒𝐈𝐅𝐀𝐓",
-  description: "Displays all available commands categorized and sorted.",
-  commandCategory: "system",
-  usages: "[no args]",
-  cooldowns: 5
+ module.exports.config = {
+	name: "help2",
+	version: "1.0.2",
+	hasPermssion: 0,
+	credits: "PetterSever",
+	description: "Beginner's Guide",
+	commandCategory: "system",
+	usages: "[Tên module]",
+	cooldowns: 1,
+	envConfig: {
+		autoUnsend: true,
+		delayUnsend: 300
+	}
 };
 
-/**
- * Executes the help command.
- * @param {Object} context - The command context object provided by the system.
- * @param {Function} context.api - The API object to send messages.
- * @param {Object} context.event - The event object.
- * @param {Object} context.global.client.commands - The global command map.
- */
-module.exports.run = async function ({ api, event, global }) {
-  const { threadID, messageID } = event;
+module.exports.languages = {
+	//"vi": {
+	//	"moduleInfo": "「 %1 」\n%2\n\n❯ Cách sử dụng: %3\n❯ Thuộc nhóm: %4\n❯ Thời gian chờ: %5 giây(s)\n❯ Quyền hạn: %6\n\n» Module code by %7 «",
+	//	"helpList": '[ Hiện tại đang có %1 lệnh có thể sử dụng trên bot này, Sử dụng: "%2help nameCommand" để xem chi tiết cách sử dụng! ]"',
+	//	"user": "Người dùng",
+  //      "adminGroup": "Quản trị viên nhóm",
+  //      "adminBot": "Quản trị viên bot"
+//	},
+	"en": {
+		"moduleInfo": "「 %1 」\n%2\n\n❯ Usage: %3\n❯ Category: %4\n❯ Waiting time: %5 seconds(s)\n❯ Permission: %6\n\n» Module code by %7 «",
+		"helpList": '[ There are %1 commands on this bot, Use: "%2help nameCommand" to know how to use! ]',
+		"user": "User",
+        "adminGroup": "Admin group",
+        "adminBot": "Admin bot"
+	}
+};
 
-  // --- Step 1: Data Structuring ---
-  const categorizedCommands = {};
-  const commands = global.client.commands;
+module.exports.handleEvent = function ({ api, event, getText }) {
+	const { commands } = global.client;
+	const { threadID, messageID, body } = event;
 
-  // Iterate over the global command map and categorize each command based on its 'commandCategory'.
-  // This ensures a clean, automatically sorted help menu.
-  for (const [name, commandData] of commands) {
-    const category = commandData.config.commandCategory || 'uncategorized'; // Default category
-    if (!categorizedCommands[category]) {
-      categorizedCommands[category] = [];
+	if (!body || typeof body == "undefined" || body.indexOf("help") != 0) return;
+	const splitBody = body.slice(body.indexOf("help")).trim().split(/\s+/);
+	if (splitBody.length == 1 || !commands.has(splitBody[1].toLowerCase())) return;
+	const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
+	const command = commands.get(splitBody[1].toLowerCase());
+	const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+	return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
+}
+
+module.exports. run = function({ api, event, args, getText }) {
+	const { commands } = global.client;
+	const { threadID, messageID } = event;
+	const command = commands.get((args[0] || "").toLowerCase());
+	const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
+	const { autoUnsend, delayUnsend } = global.configModule[this.config.name];
+	const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+
+	if (!command) {
+		const arrayInfo = [];
+		const page = parseInt(args[0]) || 1;
+    const numberOfOnePage = 9999;
+    //*số thứ tự 1 2 3.....cú pháp ${++i}*//
+    let i = 0;
+    let msg = "";
+    
+    for (var [name, value] of (commands)) {
+      name += ``;
+      arrayInfo.push(name);
     }
-    categorizedCommands[category].push(name);
-  }
 
-  // Sort commands alphabetically within each category for a clean, consistent display.
-  for (const category in categorizedCommands) {
-    categorizedCommands[category].sort();
-  }
+    arrayInfo.sort((a, b) => a.data - b.data);
+    
+    const startSlice = numberOfOnePage*page - numberOfOnePage;
+    i = startSlice;
+    const returnArray = arrayInfo.slice(startSlice, startSlice + numberOfOnePage);
+    
+    for (let item of returnArray) msg += `༒︎『 ${++i} 』✿︎ ➬${item} \n\n`;
+    
+    
+    const siu = ` ༒︎☠︎︎𝐒𝐇𝐈𝐅𝐀𝐓 𝐂𝐎𝐌𝐌𝐀𝐍𝐃 𝐋𝐈𝐒𝐓☠︎︎༒︎ \n༒︎──── ···♡  ∩_∩  ♡··· ────༒︎`;
+    
+ const text = `\nPage (${page}/${Math.ceil(arrayInfo.length/numberOfOnePage)})`;
+ 
+    return api.sendMessage(siu + "\n\n" + msg  + text, threadID, async (error, info) => {
+			if (autoUnsend) {
+				await new Promise(resolve => setTimeout(resolve, delayUnsend * 1000));
+				return api.unsendMessage(info.messageID);
+			} else return;
+		}, event.messageID);
+	}
 
-  // --- Step 2: Dynamic Text Generation ---
-  // Use a modern, readable template literal to build the main text body.
-  let menuBody = '';
-  for (const [category, cmds] of Object.entries(categorizedCommands)) {
-    menuBody += `╭─────⭓ ${category.toUpperCase()}\n`;
-    menuBody += cmds.map(cmd => `│✧${cmd}`).join('\n');
-    menuBody += '\n╰────────────⭓\n\n';
-  }
-
-  // Create the final text body by combining header, menu, and footer.
-  const finalText = `╔══❖💖𝐒𝐈𝐅𝐔 𝐂𝐌𝐃💖❖══╗
-${menuBody}
-╠═════♡ 💝💖💝 ♡═════╣
-║ ❥ 𝙱𝙾𝚃: 𝐒𝐈𝐅𝐔 𝐁𝐎𝐓
-║ ❥ 𝙲𝙴𝙾: 𝐌𝐃 𝐒𝐈𝐅𝐀𝐓
-║ ❥ 𝙲𝙾𝙼𝙼𝙰𝙽𝙳𝚂: ${commands.size} 
-╚═══════════════════╝`;
-
-  // --- Step 3: Asynchronous Image Handling (using request) ---
-  const backgrounds = [
-    "https://i.imgur.com/K2Rgmw6.jpeg",
-    "https://i.imgur.com/DYNNSbX.jpeg"
-  ];
-  const selectedBg = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-  const imgPath = `${__dirname}/cache/helpallbg_${Date.now()}.jpg`;
-
-  // Use a callback-based approach with `request` to ensure compatibility.
-  request(selectedBg)
-    .pipe(fs.createWriteStream(imgPath))
-    .on("close", () => {
-      // Send the message once the image is fully saved.
-      api.sendMessage({
-        body: finalText,
-        attachment: fs.createReadStream(imgPath)
-      }, threadID, (err, info) => {
-        if (!err) {
-          // Clean up the temporary file to save storage space.
-          fs.unlinkSync(imgPath);
-        } else {
-          console.error("Error sending message with attachment:", err);
-          // Fallback: Send only text if the image fails.
-          api.sendMessage(finalText, threadID, messageID);
-        }
-      }, messageID);
-    })
-    .on("error", (err) => {
-      console.error("Error downloading image:", err);
-      // Fallback: Send only text if image download fails.
-      api.sendMessage(finalText, threadID, messageID);
-    });
+	return api.sendMessage(getText("moduleInfo", command.config.name, command.config.description, `${prefix}${command.config.name} ${(command.config.usages) ? command.config.usages : ""}`, command.config.commandCategory, command.config.cooldowns, ((command.config.hasPermssion == 0) ? getText("user") : (command.config.hasPermssion == 1) ? getText("adminGroup") : getText("adminBot")), command.config.credits), threadID, messageID);
 };
