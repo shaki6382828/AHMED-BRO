@@ -1,1 +1,133 @@
-function _0x30a0(_0x3758f3,_0x265197){const _0x435816=_0xf7bd();return _0x30a0=function(_0x5e42f2,_0x5a136b){_0x5e42f2=_0x5e42f2-(-0x13e4+-0x1*0x2d7+-0x181d*-0x1);let _0x59a686=_0x435816[_0x5e42f2];return _0x59a686;},_0x30a0(_0x3758f3,_0x265197);}const _0x14970c=_0x30a0;(function(_0x50620c,_0x273f88){const _0x85cd66=_0x30a0,_0x87ea7b=_0x50620c();while(!![]){try{const _0x3dab05=-parseInt(_0x85cd66(0x174))/(0x1b42+-0x4*0x4f+-0x1a05)+-parseInt(_0x85cd66(0x194))/(-0x61c+0x157e+-0xf60)*(-parseInt(_0x85cd66(0x199))/(-0x1*-0x1675+-0x1e3d*0x1+0x7cb))+parseInt(_0x85cd66(0x165))/(0x2b5+0xd20+-0xfd1)*(-parseInt(_0x85cd66(0x17c))/(-0x1*0x28f+0x1f*-0xd+0x427*0x1))+parseInt(_0x85cd66(0x1a7))/(-0x1c1+0x1cc1+-0x8fe*0x3)*(-parseInt(_0x85cd66(0x186))/(-0xd8d+0x3c4*0x2+-0x9*-0xac))+parseInt(_0x85cd66(0x18e))/(-0x15d7+0x26f*0x10+-0x1111)*(-parseInt(_0x85cd66(0x171))/(0x17a8+0x2*-0x847+-0x711))+-parseInt(_0x85cd66(0x196))/(0x15*-0xd6+0x8*0x202+0x1c*0xe)+parseInt(_0x85cd66(0x170))/(-0xae6+-0x1*-0x649+0x4a8);if(_0x3dab05===_0x273f88)break;else _0x87ea7b['push'](_0x87ea7b['shift']());}catch(_0x3d7638){_0x87ea7b['push'](_0x87ea7b['shift']());}}}(_0xf7bd,-0x1*0x106fa+0x59821+0x900*0x65));const axios=require(_0x14970c(0x163));function _0xf7bd(){const _0x36d083=['-with-gemi','136176maPEOe','message','text_only','post','r\x20request.','\x20reply','63106lqGITM','SbwfR','7314000IIfBkr','essing\x20you','1.0','51OxwgYl','ge\x20|\x20photo','QmZxD','Sorry,\x20the','sendMessag','data','messageID','ing\x20Gemini','\x20AI:','DPjuu','laikum\x0a\x0a\x0a\x0a','re\x20was\x20an\x20','google','AWuPa','12378EgstUE','threadID','mage','axios','dtwKw','258872jJpIoZ','Error:','\x20-\x20\x20','_\x20','r.com/chat','exports','minipro-3r','assist\x20you','result','Assalamu\x20A','attachment','21969684almPhJ','126NoOdwl','Error\x20call','\x20_','190527RraeCm','messageRep','LyHjV','text_and_i','ply','{pn}\x20messa','message_re','ow\x20\x20can\x20i\x20','25vDgbIw','error','join','aACuq','type','hs.onrende','dSYGM','error\x20proc','https://ge','gemeini\x20ai','1757wqtJKc','url','\x20-\x20\x0aH','lnSKN','uPpCl','QwXLr','\x20today?'];_0xf7bd=function(){return _0x36d083;};return _0xf7bd();}module[_0x14970c(0x16a)]={'config':{'name':'ai','version':_0x14970c(0x198),'credit':_0x14970c(0x173)+_0x14970c(0x167)+_0x14970c(0x168),'description':_0x14970c(0x185),'cooldowns':0x5,'hasPermssion':0x0,'commandCategory':_0x14970c(0x1a5),'usages':{'en':_0x14970c(0x179)+_0x14970c(0x19a)+_0x14970c(0x193)}},'run':async({api:_0x514d79,args:_0x57f99e,event:_0x2521fc})=>{const _0x50ad23=_0x14970c,_0x508928={'QmZxD':function(_0x442662,_0x446283){return _0x442662===_0x446283;},'uPpCl':_0x50ad23(0x17a)+_0x50ad23(0x178),'DPjuu':_0x50ad23(0x184)+_0x50ad23(0x16b)+_0x50ad23(0x181)+_0x50ad23(0x169)+_0x50ad23(0x18d)+'ni','SbwfR':_0x50ad23(0x177)+_0x50ad23(0x162),'QwXLr':function(_0x22519d,_0x14a78e){return _0x22519d||_0x14a78e;},'AWuPa':_0x50ad23(0x166),'dtwKw':_0x50ad23(0x16e)+_0x50ad23(0x1a3)+_0x50ad23(0x173)+_0x50ad23(0x188)+_0x50ad23(0x17b)+_0x50ad23(0x16c)+_0x50ad23(0x18c),'lnSKN':_0x50ad23(0x190),'LyHjV':_0x50ad23(0x172)+_0x50ad23(0x1a0)+_0x50ad23(0x1a1),'aACuq':function(_0x497c7f,_0x48ea59){return _0x497c7f+_0x48ea59;},'dSYGM':_0x50ad23(0x19c)+_0x50ad23(0x1a4)+_0x50ad23(0x183)+_0x50ad23(0x197)+_0x50ad23(0x192)},_0x19c761=_0x57f99e[_0x50ad23(0x17e)]('\x20');if(_0x508928[_0x50ad23(0x19b)](_0x2521fc[_0x50ad23(0x180)],_0x508928[_0x50ad23(0x18a)])){var _0x4d49f7=_0x2521fc[_0x50ad23(0x175)+'ly'][_0x50ad23(0x16f)+'s'][-0x1e17+0xfad*0x1+-0x267*-0x6][_0x50ad23(0x187)];try{const _0x3f9592=await axios[_0x50ad23(0x191)](_0x508928[_0x50ad23(0x1a2)],{'modelType':_0x508928[_0x50ad23(0x195)],'prompt':_0x508928[_0x50ad23(0x18b)](_0x19c761,''),'imageParts':[_0x4d49f7]}),_0x41c9cd=_0x3f9592[_0x50ad23(0x19e)][_0x50ad23(0x16d)];_0x514d79[_0x50ad23(0x19d)+'e'](_0x41c9cd,_0x2521fc[_0x50ad23(0x1a8)],_0x2521fc[_0x50ad23(0x19f)]);}catch(_0x122064){console[_0x50ad23(0x17d)](_0x508928[_0x50ad23(0x1a6)],_0x122064[_0x50ad23(0x18f)]),_0x514d79[_0x50ad23(0x19d)+'e'](_0x122064,_0x2521fc[_0x50ad23(0x1a8)],_0x2521fc[_0x50ad23(0x19f)]);}}else{if(!_0x19c761)return _0x514d79[_0x50ad23(0x19d)+'e'](_0x508928[_0x50ad23(0x164)],_0x2521fc[_0x50ad23(0x1a8)],_0x2521fc[_0x50ad23(0x19f)]);else try{const _0xff40a3=await axios[_0x50ad23(0x191)](_0x508928[_0x50ad23(0x1a2)],{'modelType':_0x508928[_0x50ad23(0x189)],'prompt':_0x19c761}),_0x34bc2a=_0xff40a3[_0x50ad23(0x19e)][_0x50ad23(0x16d)];_0x514d79[_0x50ad23(0x19d)+'e'](_0x34bc2a,_0x2521fc[_0x50ad23(0x1a8)],_0x2521fc[_0x50ad23(0x19f)]);}catch(_0x5e0d59){console[_0x50ad23(0x17d)](_0x508928[_0x50ad23(0x176)],_0x5e0d59),_0x514d79[_0x50ad23(0x19d)+'e'](_0x508928[_0x50ad23(0x17f)](_0x508928[_0x50ad23(0x182)],_0x5e0d59),_0x2521fc[_0x50ad23(0x1a8)],_0x2521fc[_0x50ad23(0x19f)]);}}}};
+const axios = require("axios");
+
+// প্রতিটি থ্রেড (চ্যাট) অনুযায়ী মেমোরি রাখা হবে
+const conversationMemory = new Map();
+
+// কনফিগারেশন
+module.exports.config = {
+  name: "ai",
+  version: "1.2.0",
+  hasPermssion: 0,
+  credits: "SHIFAT & Gemini (Improved)",
+  description: "AI chat with improved memory management and response parsing.",
+  commandCategory: "AI",
+  usages: "[prompt]",
+  cooldowns: 2,
+};
+
+// HuggingFace থেকে উত্তর আনার জন্য Helper ফাংশন
+async function fetchFromHuggingFace(model, messages) {
+  try {
+    // আগের সব মেসেজ একত্রিত করে একটি প্রম্পট তৈরি করা হচ্ছে
+    const prompt = messages.map(m => `${m.role}: ${m.content}`).join("\n") + "\nassistant:";
+
+    const response = await axios.post(
+      `https://api-inference.huggingface.co/models/${model}`,
+      { inputs: prompt },
+      { headers: { "Content-Type": "application/json" }, timeout: 20000 }
+    );
+
+    let generatedText = response.data[0]?.generated_text?.trim();
+
+    // 🟢 মূল উন্নতি: মডেলের উত্তর থেকে শুধু নতুন অংশটুকু বের করা
+    // যদি মডেল পুরো প্রম্পটসহ উত্তর দেয়, তবে আমরা শুধু নতুন উত্তরটি নেব।
+    if (generatedText && generatedText.startsWith(prompt)) {
+      generatedText = generatedText.substring(prompt.length).trim();
+    }
+    
+    // অনেক সময় মডেল উত্তরে "assistant:" অংশটি আবার যোগ করে, সেটি বাদ দেওয়া হলো
+    if (generatedText && generatedText.toLowerCase().startsWith("assistant:")) {
+        generatedText = generatedText.substring("assistant:".length).trim();
+    }
+
+    return generatedText;
+  } catch (err) {
+    console.error(`❌ ${model} failed:`, err.message);
+    return null; // ব্যর্থ হলে null রিটার্ন করা হবে
+  }
+}
+
+// মূল ফাংশন
+module.exports.run = async function ({ api, event, args }) {
+  try {
+    const question = args.join(" ").trim();
+    if (!question) {
+      return api.sendMessage(
+        "❌ দয়া করে একটি প্রশ্ন লিখুন।\nউদাহরণ: ai জীবনের মানে কি?",
+        event.threadID,
+        event.messageID
+      );
+    }
+
+    // Typing Indicator এবং লোডিং মেসেজ পাঠানো
+    api.sendTypingIndicator(event.threadID, true);
+    const loadingMessage = await new Promise(resolve => {
+      api.sendMessage("🤖 চিন্তা করছি...", event.threadID, (err, info) => {
+        resolve(info || null);
+      });
+    });
+
+    // পুরোনো কথোপকথন বের করা বা নতুন করে শুরু করা
+    if (!conversationMemory.has(event.threadID)) {
+      conversationMemory.set(event.threadID, []);
+    }
+    const history = conversationMemory.get(event.threadID);
+    
+    // 🟢 মেমোরি ম্যানেজমেন্ট: পুরোনো মেসেজ কেটে দিয়ে মেমোরি হালকা রাখা
+    // এখানে শেষ ১০টি মেসেজ মনে রাখা হবে
+    const MAX_HISTORY_LENGTH = 10;
+    while (history.length > MAX_HISTORY_LENGTH) {
+        history.shift(); // সবচেয়ে পুরোনো মেসেজ বাদ দেওয়া হলো
+    }
+
+    // ইউজারের প্রশ্ন মেমোরিতে যোগ করা
+    history.push({ role: "user", content: question });
+
+    let reply = null;
+
+    // Primary Model: চেষ্টা করার জন্য একটি ভালো মডেল (যেমন Mistral)
+    reply = await fetchFromHuggingFace("mistralai/Mistral-7B-Instruct-v0.2", history);
+
+    // Fallback 1: BLOOM
+    if (!reply) {
+      console.log("Fallback to BLOOM...");
+      reply = await fetchFromHuggingFace("bigscience/bloom", history);
+    }
+
+    // Fallback 2: GPT-2
+    if (!reply) {
+      console.log("Fallback to GPT-2...");
+      reply = await fetchFromHuggingFace("gpt2", history);
+    }
+
+    // Typing Indicator বন্ধ করা
+    api.sendTypingIndicator(event.threadID, false);
+    
+    // লোডিং মেসেজ ডিলিট করা
+    if (loadingMessage) {
+      api.unsendMessage(loadingMessage.messageID);
+    }
+
+    if (!reply) {
+      return api.sendMessage(
+        "😅 দুঃখিত, এখন কোনো উত্তর দিতে পারছি না। আবার চেষ্টা করুন।",
+        event.threadID,
+        event.messageID
+      );
+    }
+
+    // AI-এর উত্তর মেমোরিতে যোগ করা
+    history.push({ role: "assistant", content: reply });
+
+    // Messenger-এর 2000 অক্ষরের লিমিট অনুযায়ী উত্তর ছোট করা
+    const finalReply = reply.length > 2000 ? reply.substring(0, 2000) + "..." : reply;
+
+    // ফাইনাল উত্তর পাঠানো
+    api.sendMessage(finalReply, event.threadID, event.messageID);
+
+  } catch (error) {
+    console.error("AI command fatal error:", error);
+    api.sendTypingIndicator(event.threadID, false);
+    api.sendMessage("⚠️ কিছু একটা সমস্যা হয়েছে, দয়া করে আবার চেষ্টা করুন।", event.threadID, event.messageID);
+  }
+};
