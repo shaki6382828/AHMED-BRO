@@ -1,5 +1,5 @@
 const axios = require("axios");
-
+const usersData = require("./usersData.js"); // যদি quiz.js আর usersData.js একই ফোল্ডারে থাকে
 async function getBaseApi() {
   try {
     const res = await axios.get("https://raw.githubusercontent.com/mahmudx7/exe/main/baseApiUrl.json");
@@ -87,23 +87,24 @@ module.exports.handleReply = async function ({ api, event, handleReply }) {
 
   const { rewardCoins, rewardExp } = module.exports.config.envConfig;
 
-  if (userAnswer === correctAnswer.toLowerCase()) {
-    // ✅ এখানে কয়েন/EXP বাড়ানোর লজিক বসাও
-    // 👉 তোমার বটে যেভাবে কয়েন/EXP অ্যাড হয় সেই ফাংশন বসাও
-    // উদাহরণ:
-    // await Currencies.increaseMoney(event.senderID, rewardCoins);
-    // await Currencies.increaseExp(event.senderID, rewardExp);
+  if (userReply === correctAnswer.toLowerCase()) {
+  const rewardCoins = 500;
+  const rewardExp = 121;
 
-    api.sendMessage(
-      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\n(⚠️ কয়েন/EXP আপডেট করতে তোমার বটের সঠিক ফাংশন বসাও!)`,
-      event.threadID,
-      event.messageID
-    );
-  } else {
-    api.sendMessage(
-      `❌ ভুল উত্তর!\nসঠিক উত্তর ছিল: ${correctAnswer}`,
-      event.threadID,
-      event.messageID
-    );
+  usersData.addCoins(event.senderID, rewardCoins);
+  usersData.addExp(event.senderID, rewardExp);
+
+  const user = usersData.get(event.senderID);
+
+  api.sendMessage(
+    `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\nবর্তমান ব্যালেন্স:\n💰 কয়েন: ${user.coins}\n⭐ EXP: ${user.exp}`,
+    event.threadID,
+    event.messageID
+  );
+} else {
+  api.sendMessage(
+    `❌ ভুল উত্তর!\nসঠিক উত্তর ছিল: ${correctAnswer}`,
+    event.threadID,
+    event.messageID
+  );
   }
-};
