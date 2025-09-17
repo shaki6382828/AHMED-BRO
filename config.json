@@ -9,14 +9,14 @@
     "autoClean": true,
     "commandDisabled": [
         "",
-        "Bot.js",
+        "",
         "murgi.js",
         "murgi2.js",
         "war.js",
         "megi_chudi.js",
-        "autoreact.js",
+        "",
         "autotime.js",
-        "autoseen.js",
+        "",
         "resend.js",
         "rankup.js"
     ],
