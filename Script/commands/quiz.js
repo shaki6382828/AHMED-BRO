@@ -95,7 +95,7 @@ module.exports.handleReply = async function ({ api, event, handleReply }) {
     // await Currencies.increaseExp(event.senderID, rewardExp);
 
     api.sendMessage(
-      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\n(⚠️ কয়েন/EXP আপডেট করতে তোমার বটের সঠিক ফাংশন বসাও!)`,
+      `✅ সঠিক উত্তর!\nতুমি পেয়েছো ${rewardCoins} কয়েন এবং ${rewardExp} EXP 🎉\n\n✨`,
       event.threadID,
       event.messageID
     );
