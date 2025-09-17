@@ -40,9 +40,9 @@ module.exports.run = async function({ api, event, args }) {
 
     // কাস্টম ফরম্যাট
     const adviceMsg = 
-      `╭──────✦✨ উপদেশ ✨✦─────╮\n\n` +
+      `╭─────✦✨ᴀᴅᴠɪᴄᴇ✨✦────╮\n\n` +
       `  ${advice}\n\n` +
-      `╰───────────────────────╯`;
+      `╰────────────────────╯`;
 
     api.sendMessage(adviceMsg, event.threadID, event.messageID);
 
