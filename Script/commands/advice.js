@@ -23,26 +23,26 @@ module.exports.run = async function({ api, event, args }) {
     if (category) {
       switch(category) {
         case "fun":
-          advice = "😂 মজার উপদেশ: " + advice;
+          advice = "🐤: " + advice;
           break;
         case "inspire":
-          advice = "💡 প্রেরণাদায়ক উপদেশ: " + advice;
+          advice = "💡: " + advice;
           break;
         case "life":
-          advice = "🌱 জীবন সংক্রান্ত উপদেশ: " + advice;
+          advice = "🌱: " + advice;
           break;
         default:
-          advice = "✨ উপদেশ: " + advice;
+          advice = "✨: " + advice;
       }
     } else {
-      advice = "✨ আজকের উপদেশ: " + advice;
+      advice = "✨: " + advice;
     }
 
     // কাস্টম ফরম্যাট
     const adviceMsg = 
-      `╭───✦ উপদেশ ✦───╮\n\n` +
+      `╭──────✦✨ উপদেশ ✨✦─────╮\n\n` +
       `  ${advice}\n\n` +
-      `╰─────────────╯`;
+      `╰───────────────────────╯`;
 
     api.sendMessage(adviceMsg, event.threadID, event.messageID);
 
