@@ -1,81 +1,46 @@
-const moment = require("moment-timezone");
+const fs = require("fs");
 
 module.exports.config = {
   name: "help",
   version: "4.0.0",
   hasPermssion: 0,
-  credits: "SHIFAT",
-  description: "Show bot command list in stylish decorated format",
+  credits: "𝗦𝗛𝗜𝗙𝗔𝗧",
+  description: "Dynamic Advanced Command List",
   commandCategory: "system",
-  usages: "[command name]",
-  cooldowns: 1,
-  envConfig: {
-    autoUnsend: false,
-    delayUnsend: 60
-  }
+  usages: "help",
+  cooldowns: 5,
 };
 
-module.exports.run = function ({ api, event, args }) {
-  const { commands } = global.client;
-  const { threadID, messageID } = event;
-  const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
-  const { autoUnsend, delayUnsend } = global.configModule[this.config.name];
-  const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
+module.exports.run = async ({ api, event }) => {
+  // সব কমান্ড ফাইল লোড
+  const commandFiles = fs.readdirSync(__dirname + "/").filter(f => f.endsWith(".js"));
 
-  // নির্দিষ্ট কমান্ডের info চাইলে
-  const command = commands.get((args[0] || "").toLowerCase());
-  if (command) {
-    return api.sendMessage(
-      `✨ [ Command Info ]\n\n` +
-      `📌 Name: ${command.config.name}\n` +
-      `📝 Description: ${command.config.description}\n` +
-      `⚙️ Usage: ${prefix}${command.config.name} ${command.config.usages || ""}\n` +
-      `📂 Category: ${command.config.commandCategory}\n` +
-      `⏳ Cooldown: ${command.config.cooldowns}s\n` +
-      `🔑 Permission: ${(command.config.hasPermssion == 0) ? "User" : (command.config.hasPermssion == 1) ? "Admin Group" : "Admin Bot"}\n` +
-      `👨‍💻 Credits: ${command.config.credits}`,
-      threadID,
-      messageID
-    );
-  }
+  let categories = {};
 
-  // সব কমান্ড ক্যাটাগরি অনুযায়ী সাজানো
-  const categories = {};
-  for (const [name, value] of commands) {
-    const cat = value.config.commandCategory || "Other";
+  for (let file of commandFiles) {
+    if (file === "menu.js") continue; // menu নিজেকে বাদ দিচ্ছে
+    const command = require(__dirname + "/" + file);
+    const cat = command.config.commandCategory?.toUpperCase() || "𝗘𝗫𝗧𝗥𝗔";
+
     if (!categories[cat]) categories[cat] = [];
-    categories[cat].push(name);
+    categories[cat].push("✦" + command.config.name);
   }
 
-  for (const cat in categories) {
-    categories[cat].sort((a, b) => a.localeCompare(b));
+  // সুন্দর ফরম্যাটে বানানো
+  let msg = "✨ [ ✨𝐇𝐈𝐍𝐀𝐓𝐀 ✨ 𝐖𝐎𝐑𝐋𝐃✨ ]\n\n";
+
+  for (let cat in categories) {
+    msg += `╭───× ${cat} ×───╮\n`;
+    msg += "│ " + categories[cat].join(" ") + "\n\n";
   }
 
-  // ফ্যান্সি help menu
-  let msg = `✨ [ 𝐆𝐮𝐢𝐝𝐞 𝐅𝐨𝐫 𝐁𝐞𝐠𝐢𝐧𝐧𝐞𝐫𝐬 ] ✨\n\n`;
-  msg += `╭───★ 𝐂𝐌𝐃 𝐋𝐈𝐒𝐓 ★───╮\n`;
-  msg += `│ ✨ 𝐇 𝐈 𝐍 𝐀 𝐓 𝐀 ✨\n│\n`;
+  msg += `╰─────────────⧕
+╭─『 ✨ 𝐇 𝐈 𝐍 𝐀 𝐓 𝐀 ✨ 』
+╰‣ 𝚃𝙾𝚃𝙰𝙻 𝙲𝙼𝙳 : ✨${commandFiles.length - 1}✨
+‎╭──────✨🎀✨──────╮ 
+╰‣ 𝙱𝙾𝚃 : ✨𝐇𝐈𝐍𝐀𝐓𝐀✨
+‎╭‣ 𝙰𝙳𝙼𝙸𝙽 : ✨𝐒𝐇𝐈𝐅𝐀𝐓✨
+╰──────✨🎀✨──────╯ `;
 
-  for (const cat in categories) {
-    msg += `│ ───× \n`;
-    msg += `│ 📂 ${cat.toUpperCase()}\n`;
-    msg += `│ ${categories[cat].map(cmd => `★${cmd}`).join(" ")}\n`;
-    msg += `│\n`;
-  }
-
-  msg += `╰──────────────⧕\n`;
-  msg += `╭─『 ✨ 𝐇 𝐈 𝐍 𝐀 𝐓 𝐀 ✨ 』\n`;
-  msg += `╰‣ 📊 Total Commands: ${commands.size}\n`;
-  msg += `╰‣ 🌐 A Facebook Bot\n`;
-  msg += `╰‣ 👑 CEO : —͟͟͞͞sʜɪғꫝ֟፝ؖ۬ᴛ ✿🧃🐣\n`;
-  msg += `╰‣ 🛡️ ADMIN: —͟͟͞͞sʜɪғꫝ֟፝ؖ۬ᴛ ✿\n`;
-  msg += `╰‣ 📞 Report Issue: ${prefix}callad <ADMIN>\n`;
-  msg += `╰‣ ⏰ Time: ${moment.tz("Asia/Dhaka").format("HH:mm:ss, DD MMMM YYYY")}`;
-
-  return api.sendMessage(msg, threadID, async (error, info) => {
-    if (autoUnsend) {
-      await new Promise(resolve => setTimeout(resolve, delayUnsend * 1000));
-      return api.unsendMessage(info.messageID);
-    }
-  }, messageID);
+  api.sendMessage(msg, event.threadID, event.messageID);
 };
