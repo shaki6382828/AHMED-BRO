@@ -54,15 +54,15 @@ module.exports.run = async ({ api, event }) => {
     // Sort categories alphabetically for a cleaner look
     const sortedCategories = Object.keys(categories).sort();
 
-    let msg = "✨ [ ✨𝐇𝐈𝐍𝐀𝐓𝐀 ✨ 𝐖𝐎𝐑𝐋𝐃✨ ]\n\n";
+    let msg = "[ ✨ 𝐇𝐈𝐍𝐀𝐓𝐀 ✨ 𝐖𝐎𝐑𝐋𝐃 ✨ ]\n\n";
 
     for (const cat of sortedCategories) {
-      msg += `╭───× ${cat} ×───╮\n`;
+      msg += `╭───✨${cat}\n`;
       // Join commands and add a new line for better readability if the list is long
-      msg += "│ " + categories[cat].join(" ") + "\n\n";
+      msg += "│ \n│ " + categories[cat].join(" ") + "\n\n";
     }
 
-    msg += `╰─────────────⧕
+    msg += `╰─────────────⧕\n\n
 ╭─『 ✨ 𝐇 𝐈 𝐍 𝐀 𝐓 𝐀 ✨ 』
 ╰‣ 𝚃𝙾𝚃𝙰𝙻 𝙲𝙼𝙳 : ✨${commandCount}✨
 ‎╭──────✨🎀✨──────╮ 
