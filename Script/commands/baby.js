@@ -149,7 +149,7 @@ module.exports.handleEvent = async function ({ api, event, Users }) {
  const randomReply = greetings[Math.floor(Math.random() * greetings.length)];
 
  const mention = {
- body: `╭──────✨🎀✨──────╮\n✨𝙷𝙴𝚈 𝚇𝙰𝙰𝙽 𝙸𝙼 𝙷𝙸𝙽𝙰𝚃𝙰✨\n 𝙳𝙴𝙰𝚁 ❥ ${senderName} \n 💌 ${randomReply} \n ╰──────✨🎀✨──────╯ `,
+ body: `╭──────✨🎀✨──────╮\n✨✨𝙷𝙴𝚈 𝚇𝙰𝙰𝙽 𝙸𝙼 𝙷𝙸𝙽𝙰𝚃𝙰✨✨\n\n\n ✨𝙳𝙴𝙰𝚁✨ ${senderName} \n\n ✨💌✨ ${randomReply} \n\n ╰──────✨🎀✨──────╯ `,
  mentions: [{
  tag: `@${senderName}`,
  id: senderID
