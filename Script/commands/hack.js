@@ -1,92 +1,104 @@
-const { createCanvas, loadImage } = require("canvas");
-const fs = require("fs-extra");
-const axios = require("axios");
+const axios = require('axios');
+const fs = require('fs-extra');
+const { createCanvas, loadImage } = require('canvas');
 
-// Command Configuration
-module.exports.config = {
-    name: "hack",
-    version: "1.2.0", // Updated version
-    hasPermssion: 0,
-    credits: "𝐒𝐡𝐢𝐟𝐚𝐭",
-    description: "Generates a fake 'account hacked' image for fun.",
-    commandCategory: "fun",
-    usages: "[@mention/leave blank]",
-    cooldowns: 5
-};
+module.exports = {
+ config: {
+ name: "hack",
+ version: "1.0.3",
+ hasPermssion: 0,
+ usePrefix: true,
+ credits: "𝐂𝐘𝐁𝐄𝐑 ☢️_𖣘 -𝐁𝐎𝐓 ⚠️ 𝑻𝑬𝑨𝑀_ ☢️",
+ description: "Prank friends with hack simulation",
+ commandCategory: "Group",
+ usages: "@mention",
+ cooldowns: 0
+ },
 
-// Text Wrapping Function
-async function wrapText(context, text, maxWidth) {
-    return new Promise(resolve => {
-        if (context.measureText(text).width < maxWidth) return resolve([text]);
-        const words = text.split(" ");
-        const lines = [];
-        let currentLine = "";
-        while (words.length > 0) {
-            let word = words.shift();
-            let testLine = currentLine + word + " ";
-            if (context.measureText(testLine).width > maxWidth) {
-                lines.push(currentLine.trim());
-                currentLine = word + " ";
-            } else {
-                currentLine = testLine;
-            }
-        }
-        lines.push(currentLine.trim());
-        return resolve(lines);
-    });
-}
+ wrapText: async function (ctx, text, maxWidth) {
+ return new Promise((resolve) => {
+ if (ctx.measureText(text).width < maxWidth) return resolve([text]);
+ const words = text.split(" ");
+ const lines = [];
+ let line = "";
 
-// Main Command Logic
-module.exports.run = async function({ api, event, Users }) {
-    try {
-        const avatarPath = __dirname + "/cache/avatar.png";
-        const outputPath = __dirname + "/cache/hack.png";
+ while (words.length > 0) {
+ let split = false;
 
-        const targetID = Object.keys(event.mentions)[0] || event.senderID;
+ while (ctx.measureText(words[0]).width >= maxWidth) {
+ const temp = words[0];
+ words[0] = temp.slice(0, -1);
 
-        const userName = await Users.getNameUser(targetID);
-        
-        // --- THIS IS THE FIXED PART ---
-        // Removed the invalid access_token for more reliability
-        const avatarURL = `https://graph.facebook.com/${targetID}/picture?width=720&height=720`; 
-        const backgroundURL = "https://i.postimg.cc/PqY5t2d9/1665499955431.jpg";
+ if (split) {
+ words[1] = `${temp.slice(-1)}${words[1]}`;
+ } else {
+ split = true;
+ words.splice(1, 0, temp.slice(-1));
+ }
+ }
 
-        const [avatarResponse, backgroundResponse] = await Promise.all([
-            axios.get(avatarURL, { responseType: 'arraybuffer' }),
-            axios.get(backgroundURL, { responseType: 'arraybuffer' })
-        ]);
+ if (ctx.measureText(line + words[0]).width < maxWidth) {
+ line += `${words.shift()} `;
+ } else {
+ lines.push(line.trim());
+ line = "";
+ }
 
-        fs.writeFileSync(avatarPath, Buffer.from(avatarResponse.data, "utf-8"));
-        
-        const background = await loadImage(Buffer.from(backgroundResponse.data));
-        const avatar = await loadImage(avatarPath);
+ if (words.length === 0) lines.push(line.trim());
+ }
 
-        const canvas = createCanvas(background.width, background.height);
-        const ctx = canvas.getContext("2d");
+ return resolve(lines);
+ });
+ },
 
-        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-        ctx.drawImage(avatar, 57, 290, 66, 68);
+ run: async function ({ args, usersData, threadsData, api, event }) {
+ const cachePath = __dirname + "/cache";
+ if (!fs.existsSync(cachePath)) fs.mkdirSync(cachePath);
 
-        ctx.font = "400 23px Arial";
-        ctx.fillStyle = "#1878F3";
-        ctx.textAlign = "start";
+ const pathImg = cachePath + "/background.png";
+ const pathAvt1 = cachePath + "/Avtmot.png";
+ const mentionID = Object.keys(event.mentions)[0] || event.senderID;
+ const userInfo = await api.getUserInfo(mentionID);
+ const name = userInfo[mentionID].name;
 
-        const wrappedName = await wrapText(ctx, userName, 1160);
-        ctx.fillText(wrappedName.join("\n"), 136, 335);
+ const backgroundUrl = "https://drive.google.com/uc?id=1RwJnJTzUmwOmP3N_mZzxtp63wbvt9bLZ";
+ const avatarUrl = `https://graph.facebook.com/${mentionID}/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`;
 
-        const finalImage = canvas.toBuffer();
-        fs.writeFileSync(outputPath, finalImage);
+ try {
+ const avatarBuffer = (await axios.get(avatarUrl, { responseType: "arraybuffer" })).data;
+ fs.writeFileSync(pathAvt1, Buffer.from(avatarBuffer, "utf-8"));
 
-        return api.sendMessage({
-            body: `⚠️ Alert! Account of **${userName}** seems to be compromised! 😱`,
-            attachment: fs.createReadStream(outputPath)
-        }, event.threadID, () => {
-            fs.unlinkSync(avatarPath);
-            fs.unlinkSync(outputPath);
-        }, event.messageID);
+ const bgBuffer = (await axios.get(backgroundUrl, { responseType: "arraybuffer" })).data;
+ fs.writeFileSync(pathImg, Buffer.from(bgBuffer, "utf-8"));
 
-    } catch (error) {
-        console.error("Error in hack command:", error);
-        return api.sendMessage("❌ Something went wrong. Please try again later.", event.threadID, event.messageID);
-    }
+ const baseImage = await loadImage(pathImg);
+ const baseAvt1 = await loadImage(pathAvt1);
+ const canvas = createCanvas(baseImage.width, baseImage.height);
+ const ctx = canvas.getContext("2d");
+
+ ctx.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+ ctx.font = "400 23px Arial";
+ ctx.fillStyle = "#1878F3";
+ ctx.textAlign = "start";
+
+ const lines = await this.wrapText(ctx, name, 1160);
+ ctx.fillText(lines.join("\n"), 200, 497);
+
+ ctx.beginPath();
+ ctx.drawImage(baseAvt1, 83, 437, 100, 101);
+
+ const imageBuffer = canvas.toBuffer();
+ fs.writeFileSync(pathImg, imageBuffer);
+ fs.removeSync(pathAvt1);
+
+ return api.sendMessage({
+ body: "✅ 𝙎𝙪𝙘𝙘𝙚𝙨𝙨𝙛𝙪𝙡𝙡𝙮 𝙃𝙖𝙘𝙠𝙚𝙙 𝙏𝙝𝙞𝙨 𝙐𝙨𝙚𝙧! My Lord, Please Check Your Inbox.",
+ attachment: fs.createReadStream(pathImg)
+ }, event.threadID, () => fs.unlinkSync(pathImg), event.messageID);
+
+ } catch (error) {
+ console.error("Hack module error:", error);
+ return api.sendMessage("❌ একটি সমস্যা হয়েছে, পরে আবার চেষ্টা করুন।", event.threadID, event.messageID);
+ }
+ }
 };
