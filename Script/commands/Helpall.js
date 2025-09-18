@@ -81,7 +81,7 @@ module.exports.run = async ({ api, event }) => {
 
     const sortedCategories = Object.keys(categories).sort();
 
-    let msg = "╰────────✨🎀✨────────╯\n           ✨ 𝐇𝐈𝐍𝐀𝐓𝐀 ✨ 𝐖𝐎𝐑𝐋𝐃 ✨ ]\n╭────────✨🎀✨────────╮ \n\n\n\n";
+    let msg = "╰────────✨🎀✨────────╯\n         ✨ 𝐇𝐈𝐍𝐀𝐓𝐀 ✨ 𝐖𝐎𝐑𝐋𝐃 ✨ \n╭────────✨🎀✨────────╮ \n\n\n\n";
 
     for (const cat of sortedCategories) {
       // Apply bold sans-serif font to category names
