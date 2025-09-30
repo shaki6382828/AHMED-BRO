@@ -82,13 +82,13 @@ users.needObject=Have to be an Object
 includes/handle/handleCommand.js
 
 handleCommand.userBanned=বক্স এ বেশি আবলামি করার কারণে তুমাকে ব্যান করা হয়েছে..!🚫
-handleCommand.threadBanned=Group Has Been Banned..!⛔️\nPlease Contact OwnerSHIFAT  ⚠️
-handleCommand.commandNotExist= ℂ𝕄𝔻 𝔻𝕆𝔼𝕊 ℕ𝕆𝕋 𝔼𝕏𝕀𝕊𝕋 ! 𝕋𝕐ℙ𝔼 ,ℍ𝔼𝕃ℙ 𝕋𝕆 𝕍𝕀𝔼𝕎 𝕊𝕀𝔽𝕌 𝔸𝕃𝕃 ℂ𝕄𝔻 !
+handleCommand.threadBanned=Group Has Been Banned..!⛔️\nPlease Contact OwnerSakib ⚠️
+handleCommand.commandNotExist= ℕ𝔼𝕆𝕏⚡ ℂ𝕄𝔻 𝔻𝕆𝔼𝕊 ℕ𝕆𝕋 𝔼𝕏𝕀𝕊𝕋 ! 𝕋𝕐ℙ𝔼 ,ℍ𝔼𝕃ℙ 𝕋𝕆 𝕍𝕀𝔼𝕎 ℕ𝔼𝕆𝕏⚡ 𝔸𝕃𝕃 ℂ𝕄𝔻 !
 handleCommand.commandThreadBanned=Your thread is unable to use command "%1"
 handleCommand.commandUserBanned=You are unable to use command "%1"
 handleCommand.threadNotAllowNSFW=This Commnd Only use Andmin
 handleCommand.cantGetInfoThread=Can't get your thread's info, error: %1
-handleCommand.permssionNotEnough="%1 ⎯⎯⎯⎯⎯⎯\n\n✨ 𝕆ℕ𝕃𝕐 𝕊ℍ𝕀𝔽𝔸𝕋 𝕀𝕊 𝔸𝕌𝕋ℍ𝕆ℝ𝕀ℤ𝔼𝔻 𝕋𝕆 𝕌𝕊𝔼 𝕋ℍ𝕀𝕊 ℂ𝕆𝕄𝕄𝔸ℕ𝔻 !‽
+handleCommand.permssionNotEnough="%1 ⎯⎯⎯⎯⎯⎯\n\n✨ 𝕆ℕ𝕃𝕐 𝔸ℍ𝕄𝔼𝔻 𝕊𝕀𝕋ℍ𝕀𝕃 𝕀𝕊 𝔸𝕌𝕋ℍ𝕆ℝ𝕀ℤ𝔼𝔻 𝕋𝕆 𝕌𝕊𝔼 𝕋ℍ𝕀𝕊 ℂ𝕆𝕄𝕄𝔸ℕ𝔻 !‽
 handleCommand.cantSetMessageReaction=Having some unexpected error at setMessageReaction, error: %1
 handleCommand.executeCommand=[ %1 ] Command used: %2 by user: %3 at thread: %4 | Args included: %5 | Processing time: %6ms
 handleCommand.commandError=Having some unexpected error when using command %1, error: %2
