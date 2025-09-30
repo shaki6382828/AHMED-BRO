@@ -10,7 +10,7 @@ module.exports.config = {
   name: "ai",
   version: "2.1.0", // More Resilient Version
   hasPermssion: 0,
-  credits: "Ariyan & Gemini (Auto-Retry & Fallback)",
+  credits: "SHIFAT",
   description: "AI chat with auto-retry logic and a fallback model to handle server overload.",
   commandCategory: "AI",
   usages: "[prompt]",
@@ -74,7 +74,7 @@ module.exports.run = async function ({ api, event, args }) {
   try {
     const question = args.join(" ").trim();
     if (!question) {
-      return api.sendMessage(" ♡  ∩_∩                         ∩_∩  ♡\n（„• ֊ •„)♡sʜɪғꫝ֟፝ؖ۬ᴛ ꫝ֟፝ؖ۬ɪ(„• ֊ •„) \n⟡─∪∪─────────∪∪───⟡\n│─𝙷𝙾𝚆 𝙲𝙰𝙽 𝙸 𝙷𝙴𝙻𝙿 𝚄 𝚂𝙸𝚁─│ \n⟡─────────────────⟡\n│(¬◡¬)✧    (¬◡¬)✧    (¬◡¬)✧│ \n⟡─────────────────⟡", event.threadID, event.messageID);
+      return api.sendMessage(" ♡  ∩_∩                         ∩_∩  ♡\n（„• ֊ •„)𝐍𝐄𝐎𝐗⚡(„• ֊ •„) \n⟡─∪∪─────────∪∪───⟡\n│─𝙷𝙾𝚆 𝙲𝙰𝙽 𝙸 𝙷𝙴𝙻𝙿 𝚄 𝚂𝙸𝚁─│ \n⟡─────────────────⟡\n│(¬◡¬)✧    (¬◡¬)✧    (¬◡¬)✧│ \n⟡─────────────────⟡", event.threadID, event.messageID);
     }
     
     api.sendTypingIndicator(event.threadID, true);
